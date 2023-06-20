@@ -25,12 +25,12 @@ function App() {
     return (
         <Router>
             <div>
-                <NavBar isAuthenticated={isAuthenticated} handleLogout={handleLogout}/>
+                <NavBar isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
                 <Routes>
                     <Route path="Home" element={<Home />} />
-                    <Route path="/UserProfile" element={<UserProfile />} />
+                    <Route path="/UserProfile" element={<UserProfile loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />} />
                     <Route path="/Branchces" element={<Branchces />} />
-                    <Route path="/Login" element={<Login users={users} setUsers={setUsers} setIsAuthenticated={setIsAuthenticated} setLoggedInUser={setLoggedInUser} />} />
+                    <Route path="/Login" element={<Login users={users} setUsers={setUsers} setIsAuthenticated={setIsAuthenticated} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} />} />
                     <Route path="/Registration" element={<Registration users={users} setUsers={setUsers} />} />
                     <Route path="/News" element={<News />} />
                     <Route path="/AboutUs" element={<AboutUs />} />

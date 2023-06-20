@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-const Login = ({ users, setUsers, setIsAuthenticated}) => {
+const Login = ({ users, setUsers, setIsAuthenticated, loggedInUser, setLoggedInUser}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = (loggedInUser, setLoggedInUser) => {
+    const handleLogin = () => {
         const user = users.find(user => user.username === username && user.password === password);
         if (user) {
             setIsAuthenticated(true);
