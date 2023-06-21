@@ -5,8 +5,9 @@ const Branchces = () => {
     const branchces = [
         {
             address: 'ul. Niepodległości 5, 35-012 Rzeszów',
-            image: "https://cdn.pixabay.com/photo/2013/04/30/15/29/woburn-108205_1280.jpg",
+            image : "https://cdn.pixabay.com/photo/2013/04/30/15/29/woburn-108205_1280.jpg",
             description: 'Dział "Eksploratorium Wiedzy" w naszym działu "Eksploratorium Wiedzy" w sercu Rzeszowa! Ta biblioteka jest domem dla unikalnych zbiorów naukowych i technologicznych. Odkryj fascynujące eksponaty, interaktywne wystawy i najnowsze publikacje z dziedziny nauki i technologii. Przeżyj wspaniałą przygodę poznawania i eksploracji wiedzy w otoczeniu dynamicznego miasta.',
+
         },
         {
             address: 'Ul. Małopolska 8, 32-012 Kraków',
@@ -36,7 +37,7 @@ const Branchces = () => {
                 {branchces.map((branch, index) => (
                     <div key={index} className="col-md-3 mb-6">
                         <div className="card h-100" style={{maxWidth: "300px", margin: "auto"}}>
-                            <img className="card-img-top" src={branch.image} alt="Branch" />
+                            <img className="card-img-top" src={branch.image} alt="Branch" style={{ width: '100%', maxHeight: '200px' }} />
                             <div className="card-body">
                                 <h4 className="card-title">{branch.address}</h4>
                                 {expandedCards.includes(index) ? (

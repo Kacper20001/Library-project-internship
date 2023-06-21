@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import NavBar from "./components/NavBar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import Registration from './components/Registration';
 import Login from "./components/Login";
@@ -14,6 +14,7 @@ import Home from "./components/Home"
 import SuggestBook from "./components/SuggestBook";
 import UserProfile from "./components/UserProfile";
 import Contact from "./components/Contact";
+import TermsOfUse from "./components/TermsOfUse";
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [users, setUsers] = useState([]);
@@ -32,6 +33,8 @@ function App() {
                     <Route path="/AboutUs" element={<AboutUs />} />
                     <Route path="/SuggestBook" element={<SuggestBook />} />
                     <Route path="/Contact" element={<Contact />} />
+                    <Route path="/TermsOfUse" element={<TermsOfUse />} />
+
                 </Routes>
             </div>
         </Router>

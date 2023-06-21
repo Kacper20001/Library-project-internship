@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+
 const AboutUs = () => {
     return (
         <div className="container py-0">
@@ -24,6 +25,9 @@ const AboutUs = () => {
                                 <br/>
                                 Dołącz do naszej bibliotecznej społeczności i daj się ponieść fascynującym światom, które czekają na Ciebie. Zapraszamy do wspólnego odkrywania, uczenia się i czerpania radości z literatury. Niech każda wizyta w Sieci Bibliotek stanie się wyjątkowym doświadczeniem, które otworzy drzwi do nieskończonych możliwości wiedzy i wyobraźni.
                             </p>
+                            <Link to="/Registration">
+                                <button className="btn btn-primary btn-md">Dołącz do nas</button>
+                            </Link>
                         </div>
                     </div>
                 </div>

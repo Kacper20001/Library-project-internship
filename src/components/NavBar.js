@@ -44,7 +44,7 @@ const NavBar = ({  isAuthenticated, setIsAuthenticated }) => {
                                 <Link to="/SuggestBook" className="dropdown-item">Suggest a book</Link>
                                 <a className="dropdown-item" href="#">Contests</a>
                                 <a className="dropdown-item" href="#">Discussion forum</a>
-                                <a className="dropdown-item" href="#">Terms of use</a>
+                                <Link to="/TermsOfUse" className="dropdown-item">Terms of use</Link>
                             </div>
                         </li>
                         <li className="nav-item">
