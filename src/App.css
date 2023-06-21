@@ -61,3 +61,16 @@ button {
 button:hover {
     background-color: #45a049;
 }
+.img-thumbnail {
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.img-thumbnail:hover {
+    transform: scale(1.3);
+}
+
+.img-thumbnail.selected {
+    transform: scale(1.3);
+    border: 2px solid blue;
+}

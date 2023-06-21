@@ -3,6 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link, useNavigate} from "react-router-dom";
 
 const Registration = ({users, setUsers}) => {
+    const image1 = "https://cdn.pixabay.com/photo/2016/04/01/12/11/avatar-1300582_1280.png";
+    const image2 = "https://cdn.pixabay.com/photo/2016/03/31/20/27/avatar-1295773_1280.png";
+    const image3 = "https://cdn.pixabay.com/photo/2016/03/31/20/31/amazed-1295833_1280.png";
+    const image4 = "https://cdn.pixabay.com/photo/2016/03/31/20/11/avatar-1295575_1280.png";
+    const [selectedImage, setSelectedImage] = useState(null);
+
     const [confirmPassword, setConfirmPassword] = useState("");
     const [city, setCity] = useState('');
     const [street, setStreet] = useState('');
@@ -36,7 +42,7 @@ const Registration = ({users, setUsers}) => {
             return;
         }
 
-        setUsers([...users, {username, password, role: userType, email, dateOfBirth}]);
+        setUsers([...users, {username, password, role: userType, email, dateOfBirth, avatar: selectedImage}]);
         setIsRegistering(false);
         alert("Pomyślnie zarejestrowano, teraz możesz się zalogować");
         setUsername('');
@@ -48,12 +54,29 @@ const Registration = ({users, setUsers}) => {
 
     return (
         <div className={"container mt-0"}>
-            <div className="card" style={{maxWidth: "600px", margin: "auto"}}>
+            <div className="card" style={{maxWidth: "780px", margin: "auto"}}>
                 <div className="card-header text-center" style={{ margin: "0" }}>
                     <h2>Rejestracja</h2>
                 </div>
                 <div className="card-body">
                     <form>
+                        <div>
+                            <label>Wybierz avatar:</label> <br/> <br/>
+                            <div className="row mb-0">
+                                <div className="col">
+                                    <img src={image1} alt="Avatar 1" className={`img-thumbnail ${selectedImage === image1 ? 'selected' : ''}`} style={{width: "50px", height: "50px"}} onClick={() => setSelectedImage(image1)}/>
+                                </div>
+                                <div className="col">
+                                    <img src={image2} alt="Avatar 2" className={`img-thumbnail ${selectedImage === image2 ? 'selected' : ''}`} style={{width: "50px", height: "50px"}} onClick={() => setSelectedImage(image2)}/>
+                                </div>
+                                <div className="col">
+                                    <img src={image3} alt="Avatar 3" className={`img-thumbnail ${selectedImage === image3 ? 'selected' : ''}`} style={{width: "50px", height: "50px"}} onClick={() => setSelectedImage(image3)}/>
+                                </div>
+                                <div className="col">
+                                    <img src={image4} alt="Avatar 4" className={`img-thumbnail ${selectedImage === image4 ? 'selected' : ''}`} style={{width: "50px", height: "50px"}} onClick={() => setSelectedImage(image4)}/>
+                                </div>
+                            </div>
+                        </div>
                         <div className="mb-1">
                             <label className="form-label">Nazwa użytkownika:</label>
                             <input
