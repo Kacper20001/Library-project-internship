@@ -70,5 +70,4 @@ const TermsOfUse = () => {
         </Container>
     );
 };
-
 export default TermsOfUse;
