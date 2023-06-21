@@ -1,8 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const NavBar = ({ isAuthenticated, handleLogout }) => {
+const NavBar = ({  isAuthenticated, setIsAuthenticated }) => {
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+        alert("Wylogowano pomyślnie");
+        navigate('/Home');
+    }
+
     return (
         <div>
             <nav className="navbar navbar-expand-md navbar-light bg-light">
@@ -39,6 +46,9 @@ const NavBar = ({ isAuthenticated, handleLogout }) => {
                                 <a className="dropdown-item" href="#">Discussion forum</a>
                                 <a className="dropdown-item" href="#">Terms of use</a>
                             </div>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/Contact" className="nav-link">Contact</Link>
                         </li>
                         { isAuthenticated ? (
                             <>

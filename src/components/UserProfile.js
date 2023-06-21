@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const UserProfile = ({loggedInUser, setUsers, users, setLoggedInUser}) => {
     const {username = '', email = '', dateOfBirth = '', role = ''} = loggedInUser || {};
-
+    const navigate = useNavigate();
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -14,8 +16,9 @@ const UserProfile = ({loggedInUser, setUsers, users, setLoggedInUser}) => {
                 setUsers(users.map(user =>
                     user.username === loggedInUser.username ? {...user, password: newPassword} : user
                 ));
-                setLoggedInUser({ ...loggedInUser, password: newPassword }); // Update loggedInUser
+                setLoggedInUser({ ...loggedInUser, password: newPassword });
                 alert('Hasło zostało pomyślnie zmienione');
+                navigate('/Home')
             } else {
                 alert('Nowe hasło nie pasuje do potwierdzenia');
             }
@@ -38,10 +41,6 @@ const UserProfile = ({loggedInUser, setUsers, users, setLoggedInUser}) => {
             <div className="mb-3">
                 <label className="form-label">Data urodzenia:</label>
                 <p>{dateOfBirth}</p>
-            </div>
-            <div className="mb-3">
-                <label className="form-label">Typ użytkownika:</label>
-                <p>{role}</p>
             </div>
             <div>
                 <h3>Zmień hasło</h3>

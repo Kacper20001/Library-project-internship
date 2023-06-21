@@ -47,115 +47,128 @@ const Registration = ({users, setUsers}) => {
     }
 
     return (
-        <div className={"container mt-5"}>
-            <form>
-                <div className="mb-3">
-                <label className="form-label">Nazwa użytkownika:</label>
-                    <input
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
-                        placeholder="Nazwa użytkownika"
-                        className="form-control"
-                    />
+        <div className={"container mt-0"}>
+            <div className="card" style={{maxWidth: "600px", margin: "auto"}}>
+                <div className="card-header text-center" style={{ margin: "0" }}>
+                    <h2>Rejestracja</h2>
                 </div>
-                <div className="mb-3">
-                <label className="form-label">Hasło:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        placeholder="Hasło"
-                        className="form-control"
-                    />
+                <div className="card-body">
+                    <form>
+                        <div className="mb-1">
+                            <label className="form-label">Nazwa użytkownika:</label>
+                            <input
+                                value={username}
+                                onChange={e => setUsername(e.target.value)}
+                                placeholder="Nazwa użytkownika"
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="mb-1">
+                            <label className="form-label">Hasło:</label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                placeholder="Hasło"
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="mb-0">
+                            <label>Powtórz hasło:</label>
+                            <input
+                                type="password"
+                                value={confirmPassword}
+                                onChange={e => setConfirmPassword(e.target.value)}
+                                placeholder="Potwierdź Hasło"
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="mb-1">
+                            <label>Podaj e-mail:</label>
+                            <input
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                                placeholder="Email"
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="mb-1">
+                            <label>Podaj datę urodzenia:</label>
+                            <input
+                                type="date"
+                                value={dateOfBirth}
+                                onChange={e => setDateOfBirth(e.target.value)}
+                                placeholder="Data urodzenia"
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="mb-1">
+                            <label>Podaj miasto:</label>
+                            <input
+                                value={city}
+                                onChange={e => setCity(e.target.value)}
+                                placeholder="Miejscowość"
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="mb-1">
+                            <label>Podaj ulicę:</label>
+                            <input
+                                value={street}
+                                onChange={e => setStreet(e.target.value)}
+                                placeholder="Ulica"
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="mb-1">
+                            <label>Podaj numer domu</label>
+                            <input
+                                value={houseNumber}
+                                onChange={e => setHouseNumber(e.target.value)}
+                                placeholder="Numer domu"
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="mb-1">
+                            <label>Podaj województwo:</label>
+                            <select
+                                className="form-control"
+                                value={region}
+                                onChange={e => setRegion(e.target.value)}
+                            >   <option value=''>Wybierz województwo</option>
+                                <option value="dolnoslaskie">Dolnośląskie</option>
+                                <option value="kujawsko_pomorskie">Kujawsko-Pomorskie</option>
+                                <option value="lubelskie">Lubelskie</option>
+                                <option value="lubuskie">Lubuskie</option>
+                                <option value="lodzkie">Łódzkie</option>
+                                <option value="malopolskie">Małopolskie</option>
+                                <option value="mazowieckie">Mazowieckie</option>
+                                <option value="opolskie">Opolskie</option>
+                                <option value="podkarpackie">Podkarpackie</option>
+                                <option value="podlaskie">Podlaskie</option>
+                                <option value="pomorskie">Pomorskie</option>
+                                <option value="slaskie">Śląskie</option>
+                                <option value="swietokrzyskie">Świętokrzyskie</option>
+                                <option value="warminsko_mazurskie">Warmińsko-Mazurskie</option>
+                                <option value="wielkopolskie">Wielkopolskie</option>
+                                <option value="zachodniopomorskie">Zachodniopomorskie</option>
+                            </select>
+                        </div>
+                        <div style={{margin: "auto"}}>
+                            <button className="btn btn-success btn-block mt-2" style={{ padding: "10px", fontSize: "18px" }} onClick={(e) => { e.preventDefault(); handleRegister(); }}>
+                                Zarejestruj
+                            </button>
+                            <Link to="/Login">
+                                <button className="btn btn-secondary btn-block mt-2" style={{ padding: "10px", fontSize: "18px" }} onClick={() => setIsRegistering(false)}>
+                                    Wróć do logowania
+                                </button>
+                            </Link>
+                        </div>
+                    </form>
                 </div>
-                <div className="mb-3">
-                <label>Powtórz hasło:</label>
-                    <input
-                        type="password"
-                        value={confirmPassword}
-                        onChange={e => setConfirmPassword(e.target.value)}
-                        placeholder="Potwierdź Hasło"
-                        className="form-control"
-                    />
-                </div>
-                <div className="mb-3">
-                <label>Podaj e-mail:</label>
-                    <input
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        placeholder="Email"
-                        className="form-control"
-                    />
-                </div>
-                <div className="mb-3">
-                <label>Podaj datę urodzenia:</label>
-                    <input
-                        type="date"
-                        value={dateOfBirth}
-                        onChange={e => setDateOfBirth(e.target.value)}
-                        placeholder="Data urodzenia"
-                        className="form-control"
-                    />
-                </div>
-                <div className="mb-3">
-                <label>Podaj miasto:</label>
-                    <input
-                        value={city}
-                        onChange={e => setCity(e.target.value)}
-                        placeholder="Miejscowość"
-                        className="form-control"
-                    />
-                </div>
-                <div className="mb-3">
-                <label>Podaj ulicę:</label>
-                    <input
-                        value={street}
-                        onChange={e => setStreet(e.target.value)}
-                        placeholder="Ulica"
-                        className="form-control"
-                    />
-                </div>
-                <div className="mb-3">
-                <label>Podaj numer domu</label>
-                    <input
-                        value={houseNumber}
-                        onChange={e => setHouseNumber(e.target.value)}
-                        placeholder="Numer domu"
-                        className="form-control"
-                    />
-                </div>
-                <div className="mb-3">
-                <label>Podaj województwo:</label>
-                    <select
-                        className="form-control"
-                        value={region}
-                        onChange={e => setRegion(e.target.value)}
-                    >   <option value=''>Wybierz województwo</option>
-                        <option value="dolnoslaskie">Dolnośląskie</option>
-                        <option value="kujawsko_pomorskie">Kujawsko-Pomorskie</option>
-                        <option value="lubelskie">Lubelskie</option>
-                        <option value="lubuskie">Lubuskie</option>
-                        <option value="lodzkie">Łódzkie</option>
-                        <option value="malopolskie">Małopolskie</option>
-                        <option value="mazowieckie">Mazowieckie</option>
-                        <option value="opolskie">Opolskie</option>
-                        <option value="podkarpackie">Podkarpackie</option>
-                        <option value="podlaskie">Podlaskie</option>
-                        <option value="pomorskie">Pomorskie</option>
-                        <option value="slaskie">Śląskie</option>
-                        <option value="swietokrzyskie">Świętokrzyskie</option>
-                        <option value="warminsko_mazurskie">Warmińsko-Mazurskie</option>
-                        <option value="wielkopolskie">Wielkopolskie</option>
-                        <option value="zachodniopomorskie">Zachodniopomorskie</option>
-                    </select>
-                </div>
-                <button onClick={(e) => {e.preventDefault(); handleRegister();}} className="btn btn-primary me-2">Zarejestruj</button>
-                <Link to="/Login">
-                <button className="btn btn-secondary" onClick={() => setIsRegistering(false)}>Wróć do logowania</button>
-                </Link>
-                </form>
+            </div>
         </div>
-    );
+    )
 };
 
 export default Registration;
