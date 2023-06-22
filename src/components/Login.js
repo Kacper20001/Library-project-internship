@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-
-const Login = ({ users, setUsers, setIsAuthenticated, loggedInUser, setLoggedInUser }) => {
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
+const Login = () => {
+    const { users, setIsAuthenticated, setLoggedInUser } = useContext(UserContext);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();

@@ -1,8 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
-
-const NavBar = ({  isAuthenticated, setIsAuthenticated }) => {
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
+const NavBar = () => {
+    const { isAuthenticated, setIsAuthenticated } = useContext(UserContext);
     const navigate = useNavigate();
     const handleLogout = () => {
         setIsAuthenticated(false);

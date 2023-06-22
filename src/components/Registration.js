@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link, useNavigate} from "react-router-dom";
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
-const Registration = ({users, setUsers}) => {
+const Registration = () => {
+    const { users, setUsers, setUserType } = useContext(UserContext);
     const image1 = "https://cdn.pixabay.com/photo/2016/04/01/12/11/avatar-1300582_1280.png";
     const image2 = "https://cdn.pixabay.com/photo/2016/03/31/20/27/avatar-1295773_1280.png";
     const image3 = "https://cdn.pixabay.com/photo/2016/03/31/20/31/amazed-1295833_1280.png";
@@ -19,7 +22,6 @@ const Registration = ({users, setUsers}) => {
     const [email, setEmail] = useState('');
     const [isRegistering, setIsRegistering] = useState(false);
     const [dateOfBirth, setDateOfBirth] = useState('');
-    const [userType, setUserType] = useState("");
 
     const validateEmail = (email) => {
         let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -42,7 +44,7 @@ const Registration = ({users, setUsers}) => {
             return;
         }
 
-        setUsers([...users, {username, password, role: userType, email, dateOfBirth, avatar: selectedImage}]);
+        setUsers([...users, {username, password, email, dateOfBirth, avatar: selectedImage, userType:'czytelnik'}]);
         setIsRegistering(false);
         alert("Pomyślnie zarejestrowano, teraz możesz się zalogować");
         setUsername('');
