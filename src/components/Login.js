@@ -23,7 +23,7 @@ const Login = () => {
 
     return (
         <div className={"container mt-5"}>
-            <div className="card">
+            <div className="card" style={{maxWidth: "400px", margin: "auto"}}>
                 <div className="card-body">
                     <h2 className="card-title text-center mb-4">Logowanie do SmartLibrary</h2>
                     <form>

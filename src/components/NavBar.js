@@ -54,6 +54,16 @@ const NavBar = () => {
                         </li>
                         { isAuthenticated ? (
                             <>
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Books
+                                    </a>
+                                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <Link to="/Browse" className="dropdown-item">Browse</Link>
+                                        <Link to="#" className="dropdown-item">Borrowed books</Link>
+                                    </div>
+                                </li>
                                 <li className="nav-item">
                                     <Link to="/UserProfile" className="nav-link">User Profile</Link>
                                 </li>

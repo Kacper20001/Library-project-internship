@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 
 const UserProfile = () => {
-    const { users, setUsers, loggedInUser, setLoggedInUser } = useContext(UserContext);
+    const { users, setUsers, loggedInUser, setLoggedInUser, borrowedBooks, setBorrowedBooks } = useContext(UserContext);
     const { username = '', email = '', dateOfBirth = '', avatar = '', userType = '' } = loggedInUser || {};
     const navigate = useNavigate();
     const [oldPassword, setOldPassword] = useState('');
