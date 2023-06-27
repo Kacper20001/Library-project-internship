@@ -3,9 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link, useNavigate} from "react-router-dom";
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
+import { BooksContext } from '../BooksContext';
 
 const Registration = () => {
-    const { users, setUsers, setUserType, borrowedBooks, setBorrowedBooks } = useContext(UserContext);
+    const { users, setUsers, setUserType } = useContext(UserContext);
+    const {books, setBooks} = useContext(BooksContext);
+
+
     const image1 = "https://cdn.pixabay.com/photo/2016/04/01/12/11/avatar-1300582_1280.png";
     const image2 = "https://cdn.pixabay.com/photo/2016/03/31/20/27/avatar-1295773_1280.png";
     const image3 = "https://cdn.pixabay.com/photo/2016/03/31/20/31/amazed-1295833_1280.png";
@@ -43,7 +47,7 @@ const Registration = () => {
             return;
         }
 
-        setUsers([...users, {username, password, email, dateOfBirth, avatar: selectedImage, userType:'czytelnik', borrowedBooks:[]}]);
+        setUsers([...users, {username, password, email, dateOfBirth, avatar: selectedImage, userType:'czytelnik', borrowedBooks:[] }]);
         setIsRegistering(false);
         alert("Pomyślnie zarejestrowano, teraz możesz się zalogować");
         setUsername('');
@@ -51,7 +55,7 @@ const Registration = () => {
         setEmail('');
         setDateOfBirth('');
         navigate("/Login");
-        setBorrowedBooks([]);
+
     }
 
     return (
