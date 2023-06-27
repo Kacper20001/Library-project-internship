@@ -18,7 +18,7 @@ import UserProfile from "./components/UserProfile";
 import Contact from "./components/Contact";
 import TermsOfUse from "./components/TermsOfUse";
 import Browse from "./components/Browse";
-import {BooksProvider} from './BooksContext';
+import { BooksProviderProvider} from './BooksContext';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,7 +28,7 @@ function App() {
     const [books, setBooks] = useState([])
     return (
         <UserContext.Provider value={{ isAuthenticated, setIsAuthenticated, users, setUsers, loggedInUser, setLoggedInUser}}>
-            <BooksProvider value={{books, setBooks}}>
+            <BooksContext.Provider value={{books, setBooks}}>
                 <Router>
                     <div>
                         <NavBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
@@ -48,7 +48,7 @@ function App() {
                         </Routes>
                     </div>
                 </Router>
-            </BooksProvider>
+            </BooksContext.Provider>
         </UserContext.Provider>
 
     );

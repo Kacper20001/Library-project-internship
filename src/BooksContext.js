@@ -10,8 +10,8 @@ export const BooksProvider = props => {
     ])
 
     return (
-        <BooksProvider value={{books, setBooks}}>
+        <BooksContext.Provider value={{books, setBooks}}>
             {props.children}
-        </BooksProvider>
+        </BooksContext.Provider>
     );
 };
