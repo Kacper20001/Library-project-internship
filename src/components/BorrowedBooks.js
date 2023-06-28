@@ -1,15 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
-import { UserContext } from '../UserContext';
 import { BooksContext } from '../BooksContext';
-import { Button, Card, Row, Col } from 'react-bootstrap';
+import { UserContext } from '../UserContext';
+import { Card, Row, Col, Button, Form, Dropdown } from 'react-bootstrap';
 
 const BorrowedBooks = () => {
     const { loggedInUser, setUsers, users, setLoggedInUser } = useContext(UserContext);
     const { books, setBooks } = useContext(BooksContext);
     const [selectedBook, setSelectedBook] = useState(null);
     const [showBook, setShowBook] = useState(false);
-
+    const [searchQuery, setSearchQuery] = useState("");
+    const [sortField, setSortField] = useState("");
+    const [sortDirection, setSortDirection] = useState("asc");
     const returnBook = (book) => {
         const updatedUsers = users.map(user => {
             if (user.username === loggedInUser.username) {
@@ -33,6 +35,7 @@ const BorrowedBooks = () => {
         setSelectedBook(book);
         setShowBook(!showBook);
     };
+
 
     const columns = [
         {
@@ -63,12 +66,56 @@ const BorrowedBooks = () => {
             }
         }
     ];
+    const handleSearchChange = e => {
+        setSearchQuery(e.target.value);
+    };
+    const handleSort = (field, direction) => {
+        setSortField(field);
+        setSortDirection(direction);
+    };
+    let filteredBooks = (loggedInUser ? loggedInUser.borrowedBooks : []).filter(book =>
+        book.tytul.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        book.autor.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        book.gatunek.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    filteredBooks = filteredBooks.sort((a, b) => {
+        if (sortDirection === 'asc') {
+            return a[sortField] > b[sortField] ? 1 : -1;
+        } else {
+            return a[sortField] < b[sortField] ? 1 : -1;
+        }
+    });
+
 
     return (
         <div style={{ marginLeft: '0' }}>
+            <Form className="mb-3">
+                <Form.Group>
+                    <Form.Control
+                        name="searchQuery"
+                        placeholder="Tytuł | Autor | Gatunek"
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                    />
+                </Form.Group>
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Sortuj
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => handleSort('tytul', 'asc')}>Tytuł (A-Z)</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSort('tytul', 'desc')}>Tytuł (Z-A)</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSort('autor', 'asc')}>Autor (A-Z)</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSort('autor', 'desc')}>Autor (Z-A)</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSort('gatunek', 'asc')}>Rodzaj (A-Z)</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSort('gatunek', 'desc')}>Rodzaj (Z-A)</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </Form>
             <BootstrapTable
                 keyField='id'
-                data={loggedInUser ? loggedInUser.borrowedBooks : []}
+                data={filteredBooks}
                 columns={columns}
                 hover
             />
