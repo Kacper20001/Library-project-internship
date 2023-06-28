@@ -2,20 +2,42 @@ import React, { useState, useRef, useContext } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { BooksContext } from '../BooksContext';
 import { UserContext } from '../UserContext';
-import { Card, Row, Col, Button } from 'react-bootstrap';
+import { Card, Row, Col, Button, Form, Dropdown } from 'react-bootstrap';
+
 const Browse = () => {
     const [selectedBook, setSelectedBook] = useState(null);
     const [showBooks, setShowBooks] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [sortField, setSortField] = useState("");
+    const [sortDirection, setSortDirection] = useState("asc");
+
     const buttonRefs = useRef({});
     const {loggedInUser, setLoggedInUser, setUsers, users } = useContext(UserContext);
     const {books, setBooks} = useContext(BooksContext);
 
+    const handleSearchChange = e => {
+        setSearchQuery(e.target.value);
+    };
+
+    const handleSort = (field, direction) => {
+        setSortField(field);
+        setSortDirection(direction);
+    };
     const borrowBook = (book) => {
+        const borrowedDate = new Date();
+        const returnDate = new Date();
+        returnDate.setMonth(returnDate.getMonth() + 1);
+
+        const updatedBook = {
+            ...book,
+            borrowedDate: borrowedDate.toISOString().substring(0,10),
+            returnDate: returnDate.toISOString().substring(0,10),
+        }
         const updatedUsers = users.map(user => {
             if (user.username === loggedInUser.username) {
                 return {
                     ...user,
-                    borrowedBooks: [...user.borrowedBooks, book]
+                    borrowedBooks: [...user.borrowedBooks, updatedBook]
                 }
             }
             return user;
@@ -31,6 +53,20 @@ const Browse = () => {
         setShowBooks(selectedBook !== row || !showBooks);
         window.scrollTo({ top: buttonRefs.current[rowIndex].offsetTop, behavior: 'smooth' });
     };
+
+    let filteredBooks = books.filter(book =>
+        book.tytul.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        book.autor.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        book.gatunek.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    filteredBooks = filteredBooks.sort((a, b) => {
+        if (sortDirection === 'asc') {
+            return a[sortField] > b[sortField] ? 1 : -1;
+        } else {
+            return a[sortField] < b[sortField] ? 1 : -1;
+        }
+    });
 
     const columns = [
         {
@@ -51,9 +87,9 @@ const Browse = () => {
                 return (
                     <>
                         <Button ref={el => buttonRefs.current[rowIndex] = el} onClick={() => handleShowHideClick(row, rowIndex)}>
-                            {selectedBook === row && showBooks ? 'Hide' : 'Show'}
+                            {selectedBook === row && showBooks ? 'Ukryj' : 'Pokaż'}
                         </Button>
-                        {loggedInUser && <Button onClick={() => borrowBook(row)}>Borrow</Button>}
+                        {loggedInUser && <Button onClick={() => borrowBook(row)}>Wypożycz</Button>}
                     </>
                 );
             }
@@ -62,9 +98,32 @@ const Browse = () => {
 
     return (
         <div style={{ marginLeft: '0' }}>
+            <Form className="mb-3">
+                <Form.Group>
+                    <Form.Control
+                        name="searchQuery"
+                        placeholder="Tytuł | Autor | Gatunek"
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                    />
+                </Form.Group>
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Sortuj
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => handleSort('tytul', 'asc')}>Tytuł (A-Z)</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSort('tytul', 'desc')}>Tytuł (Z-A)</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSort('autor', 'asc')}>Autor (A-Z)</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSort('autor', 'desc')}>Autor (Z-A)</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSort('gatunek', 'asc')}>Rodzaj (A-Z)</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleSort('gatunek', 'desc')}>Rodzaj (Z-A)</Dropdown.Item>
+                    </Dropdown.Menu>
+            </Dropdown>
+            </Form>
             <BootstrapTable
                 keyField='id'
-                data={books}
+                data={filteredBooks}
                 columns={columns}
                 hover
             />

@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const NavBar = () => {
     const { isAuthenticated, setIsAuthenticated } = useContext(UserContext);
     const navigate = useNavigate();
@@ -44,8 +45,7 @@ const NavBar = () => {
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <Link to="/SuggestBook" className="dropdown-item">Suggest a book</Link>
-                                <a className="dropdown-item" href="#">Contests</a>
-                                <a className="dropdown-item" href="#">Discussion forum</a>
+                                <Link to="/Contests" className="dropdown-item">Konkursy</Link>
                                 <Link to="/TermsOfUse" className="dropdown-item">Terms of use</Link>
                             </div>
                         </li>
@@ -63,6 +63,9 @@ const NavBar = () => {
                                         <Link to="/Browse" className="dropdown-item">Browse</Link>
                                         <Link to="/BorrowedBooks" className="dropdown-item">Borrowed books</Link>
                                     </div>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/DiscussionFOrum" className="nav-link"> Forum dyskusyjne</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to="/UserProfile" className="nav-link">User Profile</Link>

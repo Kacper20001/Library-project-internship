@@ -1,70 +1,36 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Button, InputGroup, FormControl } from 'react-bootstrap';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+const News = () => {
+    const newsData = [
+        {
+            title: 'Nowe książki',
+            content: 'Rozszerzyliśmy naszą kolekcję książek o najnowsze tytuły.',
+        },
+        {
+            title: 'Konkurs czytelniczy',
+            content: 'Zapraszamy do udziału w konkursie czytelniczym, w którym możesz wygrać atrakcyjne nagrody.',
+        },
+        {
+            title: 'Spotkanie autorskie',
+            content: 'W piątek 07-07-2023 o godzinie 16:00 odbędzie się spotkanie z autorem bestsellerowej serii powieści kryminalnych.',
+        }
+    ];
 
-const News = ({ role }) => {
-    const [announcements, setAnnouncements] = useState([]);
-    const [newAnnouncement, setNewAnnouncement] = useState('');
-    const [editAnnouncementIndex, setEditAnnouncementIndex] = useState(null);
-
-    const handleAddAnnouncement = () => {
-        setAnnouncements([...announcements, newAnnouncement]);
-        setNewAnnouncement('');
-    };
-
-    const handleEditAnnouncement = (index) => {
-        setNewAnnouncement(announcements[index]);
-        setEditAnnouncementIndex(index);
-    };
-
-    const handleEditApproval = () => {
-        let updatedAnnouncements = [...announcements];
-        updatedAnnouncements[editAnnouncementIndex] = newAnnouncement;
-        setAnnouncements(updatedAnnouncements);
-        setNewAnnouncement('');
-        setEditAnnouncementIndex(null);
-    };
-
-    const handleDeleteAnnouncement = (index) => {
-        let updatedAnnouncements = [...announcements];
-        updatedAnnouncements.splice(index, 1);
-        setAnnouncements(updatedAnnouncements);
-    };
+    const newsCards = newsData.map((news, index) => (
+        <div className="card" key={index}>
+            <div className="card-body">
+                <h5 className="card-title">{news.title}</h5>
+                <p className="card-text">{news.content}</p>
+            </div>
+        </div>
+    ));
 
     return (
-        <Container>
-            <h2>News</h2>
-            {announcements.map((announcement, i) => (
-                <Row key={i}>
-                    <Col>{announcement}</Col>
-                    {role === 'bibliotekarz' && (
-                        <Col>
-                            <Button variant="primary" onClick={() => handleEditAnnouncement(i)}>Edit</Button>
-                            <Button variant="danger" onClick={() => handleDeleteAnnouncement(i)}>Delete</Button>
-                        </Col>
-                    )}
-                </Row>
-            ))}
-            {role === 'bibliotekarz' && (
-                <div>
-                    <h2>Add/Edit Announcement</h2>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            placeholder="New Announcement"
-                            aria-label="New Announcement"
-                            aria-describedby="basic-addon2"
-                            value={newAnnouncement}
-                            onChange={e => setNewAnnouncement(e.target.value)}
-                        />
-                        <InputGroup.Append>
-                            <Button variant="outline-secondary" onClick={editAnnouncementIndex === null ? handleAddAnnouncement : handleEditApproval}>
-                                {editAnnouncementIndex === null ? "Add Announcement" : "Approve Edit"}
-                            </Button>
-                        </InputGroup.Append>
-                    </InputGroup>
-                </div>
-            )}
-        </Container>
-    )
-}
+        <div className="library-news">
+            <h3>Aktualności biblioteczne</h3>
+            <div className="card-container">{newsCards}</div>
+        </div>
+    );
+};
 
 export default News;

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
@@ -15,6 +15,7 @@ const UserProfile = () => {
     const [showChangePasswordForm, setShowChangePasswordForm] = useState(false);
     const [showChangeUsernameForm, setShowChangeUsernameForm] = useState(false);
     const [showChangeEmailForm, setShowChangeEmailForm] = useState(false);
+    const passwordFormRef = useRef(null);
 
     const handleChangeUsername = () => {
         if (newUsername !== '') {
@@ -60,9 +61,13 @@ const UserProfile = () => {
         }
     };
 
+    const handleScrollToPasswordForm = () => {
+        passwordFormRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
     return (
         <div className="container mt-5">
-            <div className="card mt-4" style={{ maxWidth: "400px" }}>
+            <div className="card mt-4" style={{ maxWidth: "400px", margin:"auto" }}>
                 <div className="card-body">
                     <div className="mb-3">
                         <label className="form-label"><strong>Nazwa użytkownika:</strong></label>
@@ -84,7 +89,7 @@ const UserProfile = () => {
 
                     <div className="mb-3">
                         <label className="form-label"><strong>Email:</strong></label>
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex justify-content-between" >
                             <p>{email}</p>
                             <button className="btn btn-primary btn-sm" onClick={() => setShowChangeEmailForm(!showChangeEmailForm)}>
                                 Zmień
@@ -105,49 +110,47 @@ const UserProfile = () => {
                         <p>{dateOfBirth}</p>
                     </div>
 
-                    <button className="btn btn-primary" onClick={() => setShowChangePasswordForm(!showChangePasswordForm)}>
+                    <button className="btn btn-primary" onClick={handleScrollToPasswordForm}>
                         Zmień hasło
                     </button>
                 </div>
             </div>
 
-            {showChangePasswordForm && (
-                <div className="card mt-4" style={{ maxWidth: "400px" }}>
-                    <div className="card-body">
-                        <h3 className="card-title">Zmień hasło</h3>
-                        <div className="mb-3">
-                            <label className="form-label">Stare hasło:</label>
-                            <input
-                                type="password"
-                                value={oldPassword}
-                                onChange={e => setOldPassword(e.target.value)}
-                                className="form-control"
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Nowe hasło:</label>
-                            <input
-                                type="password"
-                                value={newPassword}
-                                onChange={e => setNewPassword(e.target.value)}
-                                className="form-control"
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Potwierdź nowe hasło:</label>
-                            <input
-                                type="password"
-                                value={confirmPassword}
-                                onChange={e => setConfirmPassword(e.target.value)}
-                                className="form-control"
-                            />
-                        </div>
-                        <button className="btn btn-primary" onClick={handleChangePassword}>
-                            Potwierdź zmianę hasła
-                        </button>
+            <div className="card mt-4" style={{ maxWidth: "400px", margin:"auto"}} ref={passwordFormRef}>
+                <div className="card-body">
+                    <h3 className="card-title">Zmień hasło</h3>
+                    <div className="mb-3">
+                        <label className="form-label">Stare hasło:</label>
+                        <input
+                            type="password"
+                            value={oldPassword}
+                            onChange={e => setOldPassword(e.target.value)}
+                            className="form-control"
+                        />
                     </div>
+                    <div className="mb-3">
+                        <label className="form-label">Nowe hasło:</label>
+                        <input
+                            type="password"
+                            value={newPassword}
+                            onChange={e => setNewPassword(e.target.value)}
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Potwierdź nowe hasło:</label>
+                        <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={e => setConfirmPassword(e.target.value)}
+                            className="form-control"
+                        />
+                    </div>
+                    <button className="btn btn-primary" onClick={handleChangePassword}>
+                        Potwierdź zmianę hasła
+                    </button>
                 </div>
-            )}
+            </div>
         </div>
     );
 };
