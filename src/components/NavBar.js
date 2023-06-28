@@ -61,7 +61,7 @@ const NavBar = () => {
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <Link to="/Browse" className="dropdown-item">Browse</Link>
-                                        <Link to="#" className="dropdown-item">Borrowed books</Link>
+                                        <Link to="/BorrowedBooks" className="dropdown-item">Borrowed books</Link>
                                     </div>
                                 </li>
                                 <li className="nav-item">

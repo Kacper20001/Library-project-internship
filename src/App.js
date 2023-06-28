@@ -6,7 +6,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import { UserContext } from './UserContext';
-import { BooksContext } from './BooksContext';
 import Registration from './components/Registration';
 import Login from "./components/Login";
 import News from './components/News';
@@ -18,7 +17,8 @@ import UserProfile from "./components/UserProfile";
 import Contact from "./components/Contact";
 import TermsOfUse from "./components/TermsOfUse";
 import Browse from "./components/Browse";
-import { BooksProviderProvider} from './BooksContext';
+import BorrowedBooks from "./components/BorrowedBooks";
+import {BooksProvider} from './BooksContext';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,7 +28,7 @@ function App() {
     const [books, setBooks] = useState([])
     return (
         <UserContext.Provider value={{ isAuthenticated, setIsAuthenticated, users, setUsers, loggedInUser, setLoggedInUser}}>
-            <BooksContext.Provider value={{books, setBooks}}>
+            <BooksProvider value={{books, setBooks}}>
                 <Router>
                     <div>
                         <NavBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
@@ -45,10 +45,12 @@ function App() {
                             <Route path="/Contact" element={<Contact />} />
                             <Route path="/TermsOfUse" element={<TermsOfUse />} />
                             <Route path="/Browse" element={<Browse />} />
+                            <Route path="/BorrowedBooks" element={<BorrowedBooks />} />
+
                         </Routes>
                     </div>
                 </Router>
-            </BooksContext.Provider>
+            </BooksProvider>
         </UserContext.Provider>
 
     );

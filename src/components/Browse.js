@@ -1,14 +1,13 @@
 import React, { useState, useRef, useContext } from 'react';
-import { UserContext } from '../UserContext';
-import { BooksContext } from '../BooksContext';
 import BootstrapTable from 'react-bootstrap-table-next';
+import { BooksContext } from '../BooksContext';
+import { UserContext } from '../UserContext';
 import { Card, Row, Col, Button } from 'react-bootstrap';
-
 const Browse = () => {
     const [selectedBook, setSelectedBook] = useState(null);
     const [showBooks, setShowBooks] = useState(false);
     const buttonRefs = useRef({});
-    const {loggedInUser, setUsers, users } = useContext(UserContext);
+    const {loggedInUser, setLoggedInUser, setUsers, users } = useContext(UserContext);
     const {books, setBooks} = useContext(BooksContext);
 
     const borrowBook = (book) => {
@@ -21,8 +20,10 @@ const Browse = () => {
             }
             return user;
         });
+        const updatedLoggedInUser = updatedUsers.find(user => user.username === loggedInUser.username);
         setUsers(updatedUsers);
         setBooks(books.filter(b => b.id !== book.id));
+        setLoggedInUser(updatedLoggedInUser);
     };
 
     const handleShowHideClick = (row, rowIndex) => {
