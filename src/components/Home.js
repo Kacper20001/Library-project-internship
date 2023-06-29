@@ -12,7 +12,7 @@ const Home = () => {
                         <div className="card-body">
                             <h2 className="card-title text-center mb-4">Witamy w SmartLibrary!</h2>
                             <Link to="/AboutUs">
-                                <button className="btn btn-primary btn-lg">Dowiedz się więcej o nas</button>
+                                <button className="btn btn-primary btn-lg">Dowiedz się więcej</button>
                             </Link>
                             <div className="carousel-container">
                                 <Carousel>

@@ -4,11 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AdminContext } from '../AdminContext';
+
 const NavBar = () => {
     const { isAuthenticated, setIsAuthenticated } = useContext(UserContext);
+    const { adminIsLoggedIn, setAdminIsLoggedIn } = useContext(AdminContext);
     const navigate = useNavigate();
     const handleLogout = () => {
         setIsAuthenticated(false);
+        setAdminIsLoggedIn
         alert("Wylogowano pomyślnie");
         navigate('/Home');
     }

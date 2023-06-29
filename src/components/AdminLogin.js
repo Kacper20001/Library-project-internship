@@ -1,20 +1,8 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AdminProvider, AdminContext } from '../AdminContext';
-
-const PracownikLogin = () => {
-    const { adminLogin, setAdminLogin, adminPassword, setAdminPassword } = useContext(AdminContext);
-    const navigate = useNavigate();
-
-    const handleLoginAdmin = () => {
-        if (adminLogin === '12345' && adminPassword === '12345') {
-            alert('Zalogowano pomyślnie');
-            navigate('/Home');
-        } else {
-            alert('Niepoprawny login lub hasło');
-        }
-    };
-
+import React, {useContext} from 'react';
+import { AdminContext } from '../AdminContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
+const AdminLogin = () => {
+    const { adminLogin, setAdminLogin, adminPassword, setAdminPassword, adminIsLoggedIn, handleAdminLogin  } = useContext(AdminContext);
     return (
         <div className="container mt-5">
             <div className="card" style={{ maxWidth: '400px', margin: 'auto' }}>
@@ -40,7 +28,7 @@ const PracownikLogin = () => {
                                 className="form-control"
                             />
                         </div>
-                        <button type="button" onClick={handleLoginAdmin} className="btn btn-sm btn-primary">
+                        <button type="button" onClick={handleAdminLogin} className="btn btn-sm btn-primary">
                             Zaloguj
                         </button>
                     </form>
@@ -50,4 +38,4 @@ const PracownikLogin = () => {
     );
 };
 
-export default PracownikLogin;
+export default AdminLogin;
