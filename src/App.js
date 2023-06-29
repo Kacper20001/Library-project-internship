@@ -11,6 +11,8 @@ import PostsContext from './PostsContext';
 import {BooksProvider} from './BooksContext';
 import {AdminProvider} from "./AdminContext";
 import {NewsProvider} from "./NewsContext";
+import {BranchesProvider} from "./BranchesContext";
+
 import Registration from './components/Registration';
 import Login from "./components/Login";
 import News from './components/News';
@@ -44,30 +46,32 @@ function App() {
                             <AdminProvider>
                                 <AboutProvider>
                                     <NewsProvider>
-                                        <div>
-                                            <NavBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-                                            <Routes>
-                                                <Route path="/" element={<Home />} />
-                                                <Route path="Home" element={<Home />} />
-                                                <Route path="/UserProfile" element={<UserProfile loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} users={users} setUsers={setUsers} />} />
-                                                <Route path="/Branchces" element={<Branchces />} />
-                                                <Route path="/Login" element={<Login users={users} setUsers={setUsers} setIsAuthenticated={setIsAuthenticated} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} />} />
-                                                <Route path="/Registration" element={<Registration users={users} setUsers={setUsers} />} />
-                                                <Route path="/News" element={<News />} />
-                                                <Route path="/AboutUs" element={<AboutUs />} />
-                                                <Route path="/SuggestBook" element={<SuggestBook />} />
-                                                <Route path="/Contact" element={<Contact />} />
-                                                <Route path="/TermsOfUse" element={<TermsOfUse />} />
-                                                <Route path="/Browse" element={<Browse />} />
-                                                <Route path="/BorrowedBooks" element={<BorrowedBooks />} />
-                                                <Route path="/Contests" element={<Contests />} />
-                                                <Route path="/DiscussionForum" element={<Discussion />} />
-                                                <Route path="/Footer" element={<Footer />} />
-                                                <Route path="/AdminLogin" element={<AdminLogin />} />
-                                                <Route path="/AddAdmin" element={<AddAdmin />} />
-                                            </Routes>
-                                            <Footer/>
-                                        </div>
+                                        <BranchesProvider>
+                                            <div>
+                                                <NavBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+                                                <Routes>
+                                                    <Route path="/" element={<Home />} />
+                                                    <Route path="Home" element={<Home />} />
+                                                    <Route path="/UserProfile" element={<UserProfile loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} users={users} setUsers={setUsers} />} />
+                                                    <Route path="/Branchces" element={<Branchces />} />
+                                                    <Route path="/Login" element={<Login users={users} setUsers={setUsers} setIsAuthenticated={setIsAuthenticated} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} />} />
+                                                    <Route path="/Registration" element={<Registration users={users} setUsers={setUsers} />} />
+                                                    <Route path="/News" element={<News />} />
+                                                    <Route path="/AboutUs" element={<AboutUs />} />
+                                                    <Route path="/SuggestBook" element={<SuggestBook />} />
+                                                    <Route path="/Contact" element={<Contact />} />
+                                                    <Route path="/TermsOfUse" element={<TermsOfUse />} />
+                                                    <Route path="/Browse" element={<Browse />} />
+                                                    <Route path="/BorrowedBooks" element={<BorrowedBooks />} />
+                                                    <Route path="/Contests" element={<Contests />} />
+                                                    <Route path="/DiscussionForum" element={<Discussion />} />
+                                                    <Route path="/Footer" element={<Footer />} />
+                                                    <Route path="/AdminLogin" element={<AdminLogin />} />
+                                                    <Route path="/AddAdmin" element={<AddAdmin />} />
+                                                </Routes>
+                                                <Footer/>
+                                            </div>
+                                        </BranchesProvider>
                                     </NewsProvider>
                                 </AboutProvider>
                             </AdminProvider>

@@ -1,87 +1,117 @@
 import React, { useContext, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { AdminContext } from '../AdminContext';
 import { NewsContext } from '../NewsContext';
+import { Card, Button, Form, Container, Row, Col } from 'react-bootstrap';
 
 const News = () => {
     const { adminIsLoggedIn } = useContext(AdminContext);
-    const { newsData, updateNewsData } = useContext(NewsContext);
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedNewsData, setEditedNewsData] = useState([...newsData]);
+    const { newsData, updateNewsData, addNewsPost, deleteNewsPost } = useContext(NewsContext);
+    const [newPostTitle, setNewPostTitle] = useState('');
+    const [newPostContent, setNewPostContent] = useState('');
+    const [editingIndex, setEditingIndex] = useState(null);
+    const [editingText, setEditingText] = useState('');
 
-    const handleEditClick = () => {
-        setIsEditing(true);
+    const handleEditClick = (index) => {
+        setEditingIndex(index);
+        setEditingText(newsData[index].content);
     };
 
     const handleSaveClick = () => {
-        updateNewsData(editedNewsData);
-        setIsEditing(false);
+        updateNewsData((prevNewsData) => {
+            const updatedNewsData = [...prevNewsData];
+            updatedNewsData[editingIndex].content = editingText;
+            return updatedNewsData;
+        });
+        setEditingIndex(null);
+        setEditingText('');
     };
 
-    const handleCancelClick = () => {
-        setEditedNewsData([...newsData]);
-        setIsEditing(false);
+    const handleDeleteClick = (index) => {
+        deleteNewsPost(index);
+        if (index === editingIndex) {
+            setEditingIndex(null);
+            setEditingText('');
+        }
     };
 
-    const handleTitleChange = (index, e) => {
-        const updatedNewsData = [...editedNewsData];
-        updatedNewsData[index].title = e.target.value;
-        setEditedNewsData(updatedNewsData);
+    const handleAddPost = () => {
+        const newPost = {
+            title: newPostTitle,
+            content: newPostContent,
+        };
+        addNewsPost(newPost);
+        setNewPostTitle('');
+        setNewPostContent('');
     };
-
-    const handleContentChange = (index, e) => {
-        const updatedNewsData = [...editedNewsData];
-        updatedNewsData[index].content = e.target.value;
-        setEditedNewsData(updatedNewsData);
-    };
-
-    const newsCards = editedNewsData.map((news, index) => (
-        <div className="card" key={index}>
-            <div className="card-body">
-                {isEditing ? (
-                    <>
-                        <input
-                            type="text"
-                            value={news.title}
-                            onChange={(e) => handleTitleChange(index, e)}
-                            className="form-control mb-2"
-                        />
-                        <textarea
-                            value={news.content}
-                            onChange={(e) => handleContentChange(index, e)}
-                            className="form-control"
-                        />
-                    </>
-                ) : (
-                    <>
-                        <h5 className="card-title">{news.title}</h5>
-                        <p className="card-text">{news.content}</p>
-                    </>
-                )}
-            </div>
-        </div>
-    ));
 
     return (
-        <div className="library-news">
-            <h3>Aktualności biblioteczne</h3>
-            <div className="card-container">{newsCards}</div>
-            {adminIsLoggedIn && !isEditing && (
-                <button onClick={handleEditClick} className="btn btn-primary btn-md">
-                    Edytuj
-                </button>
+        <Container>
+            <Row>
+                {newsData.map((news, index) => (
+                    <Col md={6} key={index}>
+                        <Card className="mb-4">
+                            <Card.Body>
+                                <Card.Title>{news.title}</Card.Title>
+                                {adminIsLoggedIn && index === editingIndex ? (
+                                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                                        <Form.Control
+                                            as="textarea"
+                                            value={editingText}
+                                            onChange={(e) => setEditingText(e.target.value)}
+                                        />
+                                        <Button variant="primary" onClick={handleSaveClick}>
+                                            Zapisz
+                                        </Button>
+                                    </Form.Group>
+                                ) : (
+                                    <Card.Text>{news.content}</Card.Text>
+                                )}
+                                {adminIsLoggedIn && (
+                                    <>
+                                        <Button variant="secondary" onClick={() => handleEditClick(index)}>
+                                            Edytuj
+                                        </Button>
+                                        <Button variant="danger" onClick={() => handleDeleteClick(index)}>
+                                            Usuń
+                                        </Button>
+                                    </>
+                                )}
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+            {adminIsLoggedIn && (
+                <Row>
+                    <Col md={6}>
+                        <Card className="mb-4">
+                            <Card.Body>
+                                <Card.Title>Dodaj nowy post</Card.Title>
+                                <Form.Group controlId="exampleForm.ControlInput1">
+                                    <Form.Control
+                                        type="text"
+                                        value={newPostTitle}
+                                        onChange={(e) => setNewPostTitle(e.target.value)}
+                                        placeholder="Tytuł"
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="exampleForm.ControlTextarea1">
+                                    <Form.Control
+                                        as="textarea"
+                                        value={newPostContent}
+                                        onChange={(e) => setNewPostContent(e.target.value)}
+                                        placeholder="Treść"
+                                    />
+                                </Form.Group>
+                                <Button variant="primary" onClick={handleAddPost}>
+                                    Dodaj post
+                                </Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
             )}
-            {isEditing && (
-                <>
-                    <button onClick={handleSaveClick} className="btn btn-primary btn-md me-2">
-                        Zapisz
-                    </button>
-                    <button onClick={handleCancelClick} className="btn btn-secondary btn-md">
-                        Anuluj
-                    </button>
-                </>
-            )}
-        </div>
+        </Container>
     );
 };
 

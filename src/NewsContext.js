@@ -22,8 +22,20 @@ export const NewsProvider = ({ children }) => {
         setNewsData(updatedNewsData);
     };
 
+    const addNewsPost = (newPost) => {
+        setNewsData((prevNewsData) => [...prevNewsData, newPost]);
+    };
+
+    const deleteNewsPost = (index) => {
+        setNewsData((prevNewsData) => {
+            const updatedNewsData = [...prevNewsData];
+            updatedNewsData.splice(index, 1);
+            return updatedNewsData;
+        });
+    };
+
     return (
-        <NewsContext.Provider value={{ newsData, updateNewsData }}>
+        <NewsContext.Provider value={{ newsData, updateNewsData, addNewsPost, deleteNewsPost }}>
             {children}
         </NewsContext.Provider>
     );

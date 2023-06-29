@@ -8,6 +8,7 @@ export const AdminProvider = ({ children }) => {
     const [adminIsLoggedIn, setAdminIsLoggedIn] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate();
+
     const handleEditText = () => {
         setIsEditing(true);
     };
