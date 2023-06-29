@@ -22,6 +22,7 @@ import Contests from "./components/Contests";
 import Discussion from "./components/DiscussionForum";
 import Footer from "./components/Footer";
 import AdminLogin from "./components/AdminLogin";
+import AddAdmin from "./components/AddAdmin";
 import {BooksProvider} from './BooksContext';
 import PostsContext from './PostsContext';
 import {AdminProvider} from "./AdminContext";
@@ -59,6 +60,7 @@ function App() {
                                     <Route path="/DiscussionForum" element={<Discussion />} />
                                     <Route path="/Footer" element={<Footer />} />
                                     <Route path="/AdminLogin" element={<AdminLogin />} />
+                                    <Route path="/AddAdmin" element={<AddAdmin />} />
                                 </Routes>
                                 <Footer/>
                             </div>

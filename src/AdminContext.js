@@ -18,7 +18,6 @@ export const AdminProvider = ({ children }) => {
             setAdminIsLoggedIn(false);
         }
     };
-
     const handleAdminLogout = () => {
         setAdminIsLoggedIn(false);
         setAdminLogin('');

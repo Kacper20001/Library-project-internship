@@ -14,7 +14,7 @@ const AdminLogin = () => {
                             <input
                                 value={adminLogin}
                                 onChange={(e) => setAdminLogin(e.target.value)}
-                                placeholder="Nazwa użytkownika"
+                                placeholder="Podaj kod logowania"
                                 className="form-control"
                             />
                         </div>

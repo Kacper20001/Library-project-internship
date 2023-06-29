@@ -8,14 +8,14 @@ import { AdminContext } from '../AdminContext';
 
 const NavBar = () => {
     const { isAuthenticated, setIsAuthenticated } = useContext(UserContext);
-    const { adminIsLoggedIn, setAdminIsLoggedIn } = useContext(AdminContext);
+    const { adminIsLoggedIn, setAdminIsLoggedIn, handleAdminLogout} = useContext(AdminContext);
     const navigate = useNavigate();
     const handleLogout = () => {
         setIsAuthenticated(false);
-        setAdminIsLoggedIn
+        handleAdminLogout();
         alert("Wylogowano pomyślnie");
         navigate('/Home');
-    }
+    };
 
     return (
         <div>
@@ -56,7 +56,7 @@ const NavBar = () => {
                         <li className="nav-item">
                             <Link to="/Contact" className="nav-link">Contact</Link>
                         </li>
-                        { isAuthenticated ? (
+                        { isAuthenticated  || adminIsLoggedIn ? (
                             <>
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -72,13 +72,10 @@ const NavBar = () => {
                                     <Link to="/DiscussionFOrum" className="nav-link"> Forum dyskusyjne</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/UserProfile" className="nav-link">User Profile</Link>
-                                </li>
-                                <li className="nav-item">
                                     <button onClick={handleLogout} className="nav-link btn btn-link">Logout</button>
                                 </li>
                             </>
-                        ) : (
+                        ) :  (
                             <>
                                 <li className="nav-item">
                                     <Link to="/Login" className="nav-link">Login</Link>
@@ -87,6 +84,17 @@ const NavBar = () => {
                                     <Link to="/Registration" className="nav-link">Register</Link>
                                 </li>
                             </>
+                        )
+                        }
+                        {adminIsLoggedIn && (
+                            <li className="nav-item">
+                                <Link to="/AddAdmin" className="nav-link">Add Admin</Link>
+                            </li>
+                        )}
+                        {isAuthenticated && (
+                            <li className="nav-item">
+                                <Link to="/UserProfile" className="nav-link">User Profile</Link>
+                            </li>
                         )}
                     </ul>
                 </div>
@@ -94,5 +102,6 @@ const NavBar = () => {
         </div>
     );
 };
+
 
 export default NavBar;
