@@ -2,9 +2,11 @@ import React, { useState, useRef, useContext } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { BooksContext } from '../BooksContext';
 import { UserContext } from '../UserContext';
+import { AdminContext } from '../AdminContext';
 import { Card, Row, Col, Button, Form, Dropdown } from 'react-bootstrap';
 
 const BorrowedBooks = () => {
+    const { adminIsLoggedIn } = useContext(AdminContext);
     const { loggedInUser, setUsers, users, setLoggedInUser } = useContext(UserContext);
     const { books, setBooks } = useContext(BooksContext);
     const [selectedBook, setSelectedBook] = useState(null);
@@ -55,12 +57,21 @@ const BorrowedBooks = () => {
             text: 'Return Date'
         },
         {
+            dataField: 'borrowedBy',
+            text: 'Borrowed By'
+        },
+        {
             text: 'Actions',
             formatter: (cell, row) => {
                 return (
                     <>
                         <Button onClick={() => handleShowBookClick(row)}>Show</Button>
                         <Button onClick={() => returnBook(row)}>Return</Button>
+                        {adminIsLoggedIn && (
+                            <>
+                                <Button onClick={() => extendReturnDate(row, 7)}>Extend by 7 days</Button>
+                            </>
+                        )}
                     </>
                 );
             }
@@ -87,6 +98,37 @@ const BorrowedBooks = () => {
         }
     });
 
+    filteredBooks = filteredBooks.map(book => ({
+        ...book,
+        borrowedBy: book.borrowedBy ? book.borrowedBy : loggedInUser.username
+    }));
+    const extendReturnDate = (book, days) => {
+        const updatedUsers = users.map(user => {
+            if (user.username === loggedInUser.username) {
+                const updatedBorrowedBooks = user.borrowedBooks.map(b => {
+                    if (b.id === book.id) {
+                        const extendedReturnDate = new Date(b.returnDate);
+                        extendedReturnDate.setDate(extendedReturnDate.getDate() + days);
+                        return {
+                            ...b,
+                            returnDate: extendedReturnDate.toISOString().substring(0, 10)
+                        }
+                    }
+                    return b;
+                });
+                return {
+                    ...user,
+                    borrowedBooks: updatedBorrowedBooks
+                }
+            }
+            return user;
+        });
+
+        const updatedLoggedInUser = updatedUsers.find(user => user.username === loggedInUser.username);
+
+        setUsers(updatedUsers);
+        setLoggedInUser(updatedLoggedInUser);
+    };
 
     return (
         <div style={{ marginLeft: '0' }}>
