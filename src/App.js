@@ -8,7 +8,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import { UserContext } from './UserContext';
 import { AboutProvider } from './AboutUsContext';
-import PostsContext from './PostsContext';
+import { PostsProvider } from './PostsContext';
 import {ContestsProvider} from "./ContestsContext";
 import {BooksProvider} from './BooksContext';
 import {AdminProvider} from "./AdminContext";
@@ -40,11 +40,10 @@ function App() {
     const [userType, setUserType] = useState("");
     const [books, setBooks] = useState([])
     const [posts, setPosts] = useState([]);
-
     return (
         <UserContext.Provider value={{ isAuthenticated, setIsAuthenticated, users, setUsers, loggedInUser, setLoggedInUser}}>
             <BooksProvider value={{books, setBooks}}>
-                {/*<PostsContext value={{ posts, setPosts }}>*/}
+                <PostsProvider>
                     <Router>
                             <AdminProvider>
                                 <AboutProvider>
@@ -81,7 +80,7 @@ function App() {
                                 </AboutProvider>
                             </AdminProvider>
                     </Router>
-                {/*</PostsContext>*/}
+                </PostsProvider>
             </BooksProvider>
         </UserContext.Provider>
 

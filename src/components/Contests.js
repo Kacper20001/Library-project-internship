@@ -66,11 +66,44 @@ const Contests = () => {
 
     return (
         <Container>
+            {adminIsLoggedIn && (
+                <Row>
+                    <Col md={6}>
+                        <Card className="mb-4">
+                            <Card.Body>
+                                <Card.Title>Dodaj nowy konkurs</Card.Title>
+                                <Form.Group controlId="formNewContestTitle">
+                                    <Form.Label>Tytuł</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={newContestTitle}
+                                        onChange={(e) => setNewContestTitle(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="formNewContestDescription">
+                                    <Form.Label>Opis</Form.Label>
+                                    <Form.Control
+                                        as="textarea"
+                                        value={newContestDescription}
+                                        onChange={(e) => setNewContestDescription(e.target.value)}
+                                    />
+                                </Form.Group>
+
+                                <Button variant="primary" onClick={handleAddContest}>
+                                    Dodaj konkurs
+                                </Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            )}
             <Row>
                 {contestsData.map((contest, index) => (
                     <Col md={6} key={index}>
                         <Card className="mb-4">
                             <Card.Body>
+
+
                                 {adminIsLoggedIn && index === editingIndex ? (
                                     <>
                                         <Form.Group controlId="formContestTitle">
@@ -132,37 +165,7 @@ const Contests = () => {
                 ))}
             </Row>
 
-            {adminIsLoggedIn && (
-                <Row>
-                    <Col md={6}>
-                        <Card className="mb-4">
-                            <Card.Body>
-                                <Card.Title>Dodaj nowy konkurs</Card.Title>
-                                <Form.Group controlId="formNewContestTitle">
-                                    <Form.Label>Tytuł</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        value={newContestTitle}
-                                        onChange={(e) => setNewContestTitle(e.target.value)}
-                                    />
-                                </Form.Group>
-                                <Form.Group controlId="formNewContestDescription">
-                                    <Form.Label>Opis</Form.Label>
-                                    <Form.Control
-                                        as="textarea"
-                                        value={newContestDescription}
-                                        onChange={(e) => setNewContestDescription(e.target.value)}
-                                    />
-                                </Form.Group>
 
-                                <Button variant="primary" onClick={handleAddContest}>
-                                    Dodaj konkurs
-                                </Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-            )}
         </Container>
     );
 };

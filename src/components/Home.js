@@ -15,7 +15,7 @@ const Home = () => {
                                 <button className="btn btn-primary btn-lg">Dowiedz się więcej</button>
                             </Link>
                             <div className="carousel-container">
-                                <Carousel>
+                                <Carousel interval={2500}>
                                     <Carousel.Item>
                                         <img
                                             className="d-block w-100 carousel-image"
