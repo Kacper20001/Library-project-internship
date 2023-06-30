@@ -8,12 +8,25 @@ import { Card, Row, Col, Button, Form, Dropdown } from 'react-bootstrap';
 const BorrowedBooks = () => {
     const { adminIsLoggedIn } = useContext(AdminContext);
     const { loggedInUser, setUsers, users, setLoggedInUser } = useContext(UserContext);
-    const { books, setBooks } = useContext(BooksContext);
+    const { books, setBooks, addBookReview, updateBookRating } = useContext(BooksContext);
     const [selectedBook, setSelectedBook] = useState(null);
     const [showBook, setShowBook] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [sortField, setSortField] = useState("");
     const [sortDirection, setSortDirection] = useState("asc");
+    const [reviewText, setReviewText] = useState("");
+    const [reviewRating, setReviewRating] = useState(5);
+    const [showReviewForm, setShowReviewForm] = useState(false);
+
+    const handleReviewSubmit = (bookId) => {
+        addBookReview(bookId, reviewText, reviewRating);
+        updateBookRating(bookId, reviewRating);
+        setReviewText("");
+        setReviewRating(5);
+        setShowReviewForm(false);
+    };
+
+
     const returnBook = (book) => {
         const updatedUsers = users.map(user => {
             if (user.username === loggedInUser.username) {
@@ -37,7 +50,6 @@ const BorrowedBooks = () => {
         setSelectedBook(book);
         setShowBook(!showBook);
     };
-
 
     const columns = [
         {
@@ -67,6 +79,7 @@ const BorrowedBooks = () => {
                     <>
                         <Button onClick={() => handleShowBookClick(row)}>Show</Button>
                         <Button onClick={() => returnBook(row)}>Return</Button>
+                        <Button onClick={() => {setShowReviewForm(true); setSelectedBook(row); }}>Oceń</Button>
                         {adminIsLoggedIn && (
                             <>
                                 <Button onClick={() => extendReturnDate(row, 7)}>Extend by 7 days</Button>
@@ -77,13 +90,16 @@ const BorrowedBooks = () => {
             }
         }
     ];
+
     const handleSearchChange = e => {
         setSearchQuery(e.target.value);
     };
+
     const handleSort = (field, direction) => {
         setSortField(field);
         setSortDirection(direction);
     };
+
     let filteredBooks = (loggedInUser ? loggedInUser.borrowedBooks : []).filter(book =>
         book.tytul.toLowerCase().includes(searchQuery.toLowerCase()) ||
         book.autor.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -102,6 +118,7 @@ const BorrowedBooks = () => {
         ...book,
         borrowedBy: book.borrowedBy ? book.borrowedBy : loggedInUser.username
     }));
+
     const extendReturnDate = (book, days) => {
         const updatedUsers = users.map(user => {
             if (user.username === loggedInUser.username) {
@@ -161,6 +178,33 @@ const BorrowedBooks = () => {
                 columns={columns}
                 hover
             />
+            {showReviewForm && selectedBook && (
+                <Form onSubmit={(e) => { e.preventDefault(); handleReviewSubmit(selectedBook.id); }}>
+                    <Form.Group>
+                        <Form.Label>Review:</Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            value={reviewText}
+                            onChange={e => setReviewText(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Rating:</Form.Label>
+                        <Form.Control
+                            as="select"
+                            value={reviewRating}
+                            onChange={e => setReviewRating(e.target.value)}
+                        >
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                        </Form.Control>
+                    </Form.Group>
+                    <Button type="submit">Submit Review</Button>
+                </Form>
+            )}
             {selectedBook && showBook && (
                 <Card>
                     <Row className="no-gutters">
