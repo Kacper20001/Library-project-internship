@@ -44,7 +44,7 @@ function App() {
     return (
         <UserContext.Provider value={{ isAuthenticated, setIsAuthenticated, users, setUsers, loggedInUser, setLoggedInUser}}>
             <BooksProvider value={{books, setBooks}}>
-                <PostsContext.Provider value={{ posts, setPosts }}>
+                {/*<PostsContext value={{ posts, setPosts }}>*/}
                     <Router>
                             <AdminProvider>
                                 <AboutProvider>
@@ -81,7 +81,7 @@ function App() {
                                 </AboutProvider>
                             </AdminProvider>
                     </Router>
-                </PostsContext.Provider>
+                {/*</PostsContext>*/}
             </BooksProvider>
         </UserContext.Provider>
 

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState } from 'react';
 
 export const ContestsContext = createContext();
 
@@ -21,20 +21,16 @@ export const ContestsProvider = ({ children }) => {
         }
     ]);
 
-    const updateContestsData = (updatedContestsData) => {
-        setContestsData(updatedContestsData);
+    const updateContestsData = (index, updatedContest) => {
+        setContestsData(prevContestsData => {
+            const updatedContestsData = [...prevContestsData];
+            updatedContestsData[index] = updatedContest;
+            return updatedContestsData;
+        });
     };
 
     const addContest = (newContest) => {
         setContestsData((prevContestsData) => [...prevContestsData, newContest]);
-    };
-
-    const editContest = (index, editedContest) => {
-        setContestsData((prevContestsData) => {
-            const updatedContestsData = [...prevContestsData];
-            updatedContestsData[index] = editedContest;
-            return updatedContestsData;
-        });
     };
 
     const deleteContest = (index) => {
@@ -46,9 +42,7 @@ export const ContestsProvider = ({ children }) => {
     };
 
     return (
-        <ContestsContext.Provider
-            value={{ contestsData, updateContestsData, addContest, editContest, deleteContest }}
-        >
+        <ContestsContext.Provider value={{ contestsData, updateContestsData, addContest, deleteContest }}>
             {children}
         </ContestsContext.Provider>
     );
