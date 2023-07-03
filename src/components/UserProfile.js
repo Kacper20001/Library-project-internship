@@ -1,18 +1,15 @@
 import React, { useState, useContext, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../UserContext';
+import { UserContext } from '../Contexts/UserContext';
 
 const UserProfile = () => {
-    const { users, setUsers, loggedInUser, setLoggedInUser, borrowedBooks, setBorrowedBooks } = useContext(UserContext);
-    const { username = '', email = '', dateOfBirth = '', avatar = '', userType = '' } = loggedInUser || {};
-    const navigate = useNavigate();
+    const { users, setUsers, loggedInUser, setLoggedInUser } = useContext(UserContext);
+    const { username = '', email = '', dateOfBirth = ''} = loggedInUser || {};
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [newUsername, setNewUsername] = useState(username);
     const [newEmail, setNewEmail] = useState(email);
-    const [showChangePasswordForm, setShowChangePasswordForm] = useState(false);
     const [showChangeUsernameForm, setShowChangeUsernameForm] = useState(false);
     const [showChangeEmailForm, setShowChangeEmailForm] = useState(false);
     const passwordFormRef = useRef(null);
@@ -74,14 +71,14 @@ const UserProfile = () => {
                         <div className="d-flex justify-content-between">
                             <p>{username}</p>
                             <button className="btn btn-primary btn-sm" onClick={() => setShowChangeUsernameForm(!showChangeUsernameForm)}>
-                                Zmień
+                                Change
                             </button>
                         </div>
                         {showChangeUsernameForm && (
                             <div className="d-flex justify-content-between">
                                 <input type="text" value={newUsername} onChange={e => setNewUsername(e.target.value)} className="form-control mr-2" />
                                 <button className="btn btn-primary btn-sm" onClick={handleChangeUsername}>
-                                    Potwierdź
+                                    Confirm
                                 </button>
                             </div>
                         )}
@@ -92,14 +89,14 @@ const UserProfile = () => {
                         <div className="d-flex justify-content-between" >
                             <p>{email}</p>
                             <button className="btn btn-primary btn-sm" onClick={() => setShowChangeEmailForm(!showChangeEmailForm)}>
-                                Zmień
+                                Change
                             </button>
                         </div>
                         {showChangeEmailForm && (
                             <div className="d-flex justify-content-between">
                                 <input type="text" value={newEmail} onChange={e => setNewEmail(e.target.value)} className="form-control mr-2" />
                                 <button className="btn btn-primary btn-sm" onClick={handleChangeEmail}>
-                                    Potwierdź
+                                    Confirm
                                 </button>
                             </div>
                         )}
@@ -111,16 +108,16 @@ const UserProfile = () => {
                     </div>
 
                     <button className="btn btn-primary" onClick={handleScrollToPasswordForm}>
-                        Zmień hasło
+                        Change password
                     </button>
                 </div>
             </div>
 
             <div className="card mt-4" style={{ maxWidth: "400px", margin:"auto"}} ref={passwordFormRef}>
                 <div className="card-body">
-                    <h3 className="card-title">Zmień hasło</h3>
+                    <h3 className="card-title">Change password</h3>
                     <div className="mb-3">
-                        <label className="form-label">Stare hasło:</label>
+                        <label className="form-label">Old password:</label>
                         <input
                             type="password"
                             value={oldPassword}
@@ -129,7 +126,7 @@ const UserProfile = () => {
                         />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">Nowe hasło:</label>
+                        <label className="form-label">Old password:</label>
                         <input
                             type="password"
                             value={newPassword}
@@ -138,7 +135,7 @@ const UserProfile = () => {
                         />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">Potwierdź nowe hasło:</label>
+                        <label className="form-label">New password:</label>
                         <input
                             type="password"
                             value={confirmPassword}
@@ -147,7 +144,7 @@ const UserProfile = () => {
                         />
                     </div>
                     <button className="btn btn-primary" onClick={handleChangePassword}>
-                        Potwierdź zmianę hasła
+                        Confirm
                     </button>
                 </div>
             </div>

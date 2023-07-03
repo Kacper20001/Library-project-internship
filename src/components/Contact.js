@@ -4,19 +4,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Contact = () => {
     const contacts = [
         {
-            name: "Dział \"Eksploratorium Wiedzy\"",
+            name: "\"The Knowledge Exploratory\"",
             address: 'ul. Niepodległości 5, 35-012 Rzeszów',
             phone: "666666666",
             email: "osoba1@example.com"
         },
         {
-            name: "Dział \"Oaza Literatury\"",
+            name: "\"Oasis of Literature\"",
             address: 'Ul. Małopolska 8, 32-012 Kraków',
             phone: "777777777",
             email: "osoba2@example.com"
         },
         {
-            name: "Dział \"Oaza Literatury\"",
+            name: "\"Land of Fairy Tales and Legends\"",
             address: 'Ul. Średnia 15, 12-060 Warszawa',
             phone: "888888888",
             email: "osoba3@example.com"

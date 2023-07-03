@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { AdminContext } from '../AdminContext';
+import { AdminContext } from '../Contexts/AdminContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const AdminLogin = () => {
     const { adminLogin, setAdminLogin, adminPassword, setAdminPassword, adminIsLoggedIn, handleAdminLogin  } = useContext(AdminContext);

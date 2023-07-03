@@ -1,8 +1,9 @@
+
 import React, { useState, useRef, useContext } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
-import { BooksContext } from '../BooksContext';
-import { UserContext } from '../UserContext';
-import { AdminContext } from '../AdminContext';
+import { BooksContext } from '../Contexts/BooksContext';
+import { UserContext } from '../Contexts/UserContext';
+import { AdminContext } from '../Contexts/AdminContext';
 import { Card, Row, Col, Button, Form, Dropdown } from 'react-bootstrap';
 
 const BorrowedBooks = () => {

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { AdminContext } from '../AdminContext';
-import { NewsContext } from '../NewsContext';
+import { AdminContext } from '../Contexts/AdminContext';
+import { NewsContext } from '../Contexts/NewsContext';
 import { Card, Button, Form, Container, Row, Col } from 'react-bootstrap';
 
 const News = () => {

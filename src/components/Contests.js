@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { AdminContext } from '../AdminContext';
-import { ContestsContext } from "../ContestsContext";
+import { AdminContext } from '../Contexts/AdminContext';
+import { ContestsContext } from "../Contexts/ContestsContext";
 import { Card, Button, Form, Container, Row, Col } from 'react-bootstrap';
 
 const Contests = () => {
@@ -59,7 +59,7 @@ const Contests = () => {
             <div className="card-body">
                 <h5 className="card-title">{contest.title}</h5>
                 <p className="card-text">{contest.description}</p>
-                <p className="card-deadline">Termin zgłoszeń: {contest.deadline}</p>
+                <p className="card-deadline">Application deadline: {contest.deadline}</p>
             </div>
         </div>
     ));
@@ -123,7 +123,7 @@ const Contests = () => {
                                             />
                                         </Form.Group>
                                         <Form.Group controlId="formContestDeadline">
-                                            <Form.Label>Termin zgłoszeń</Form.Label>
+                                            <Form.Label>Application deadline:</Form.Label>
                                             <Form.Control
                                                 type="text"
                                                 value={editingDeadline}
@@ -138,7 +138,7 @@ const Contests = () => {
                                     <>
                                         <Card.Title>{contest.title}</Card.Title>
                                         <Card.Text>{contest.description}</Card.Text>
-                                        <Card.Text>Termin zgłoszeń: {contest.deadline}</Card.Text>
+                                        <Card.Text>Application deadline: {contest.deadline}</Card.Text>
                                     </>
                                 )}
 

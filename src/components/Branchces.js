@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BranchesContext } from '../BranchesContext';
-import { AdminContext } from '../AdminContext';
+import { BranchesContext } from '../Contexts/BranchesContext';
+import { AdminContext } from '../Contexts/AdminContext';
 
 const Branches = () => {
     const { newsData, updateNewsData } = useContext(BranchesContext);
@@ -77,7 +77,7 @@ const Branches = () => {
                                                     className="btn btn-primary"
                                                     onClick={() => toggleCardExpansion(index)}
                                                 >
-                                                    {expandedCards.includes(index) ? 'Zwiń' : 'Rozwiń'}
+                                                    {expandedCards.includes(index) ? 'Collapse' : 'Expand'}
                                                 </button>
                                             </>
                                         ) : (
@@ -90,7 +90,7 @@ const Branches = () => {
                                         className="btn btn-primary mt-2"
                                         onClick={() => handleEditClick(index)}
                                     >
-                                        Edytuj
+                                        Edit
                                     </button>
                                 )}
                             </div>

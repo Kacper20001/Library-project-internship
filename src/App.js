@@ -6,14 +6,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 
-import { UserContext } from './UserContext';
-import { AboutProvider } from './AboutUsContext';
-import { PostsProvider } from './PostsContext';
-import {ContestsProvider} from "./ContestsContext";
-import {BooksProvider} from './BooksContext';
-import {AdminProvider} from "./AdminContext";
-import {NewsProvider} from "./NewsContext";
-import {BranchesProvider} from "./BranchesContext";
+import { UserContext } from './Contexts/UserContext';
+import { AboutProvider } from './Contexts/AboutUsContext';
+import { PostsProvider } from './Contexts/PostsContext';
+import {ContestsProvider} from "./Contexts/ContestsContext";
+import {BooksProvider} from './Contexts/BooksContext';
+import {AdminProvider} from "./Contexts/AdminContext";
+import {NewsProvider} from "./Contexts/NewsContext";
+import {BranchesProvider} from "./Contexts/BranchesContext";
 
 import Registration from './components/Registration';
 import Login from "./components/Login";

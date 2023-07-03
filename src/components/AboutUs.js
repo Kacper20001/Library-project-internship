@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import { AdminContext } from '../AdminContext';
-import { AboutUsContext } from '../AboutUsContext';
+import { AdminContext } from '../Contexts/AdminContext';
+import { AboutUsContext } from '../Contexts/AboutUsContext';
 
 const AboutUs = () => {
     const { adminIsLoggedIn, isEditing,setIsEditing, handleEditText } = useContext(AdminContext);
@@ -47,7 +47,7 @@ const AboutUs = () => {
                                 </>
                             )}
                             <Link to="/Registration">
-                                <button className="btn btn-primary btn-md">Dołącz do nas</button>
+                                <button className="btn btn-primary btn-md">Join Us</button>
                             </Link>
                         </div>
                     </div>

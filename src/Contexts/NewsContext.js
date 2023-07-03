@@ -5,16 +5,16 @@ export const NewsContext = createContext();
 export const NewsProvider = ({ children }) => {
     const [newsData, setNewsData] = useState([
         {
-            title: 'Nowe książki',
-            content: 'Rozszerzyliśmy naszą kolekcję książek o najnowsze tytuły.',
+            title: 'New Books',
+            content: 'We have expanded our book collection with the latest titles'
         },
         {
-            title: 'Konkurs czytelniczy',
-            content: 'Zapraszamy do udziału w konkursie czytelniczym, w którym możesz wygrać atrakcyjne nagrody.',
+            title: 'Reading competition',
+            content: 'We invite you to participate in a reading competition in which you can win attractive prizes',
         },
         {
-            title: 'Spotkanie autorskie',
-            content: 'W piątek 07-07-2023 o godzinie 16:00 odbędzie się spotkanie z autorem bestsellerowej serii powieści kryminalnych.',
+            title: 'Author\'s meeting',
+            content: 'On Friday, 07-07-2023 at 16:00 there will be a meeting with the author of the best-selling series of crime novels',
         },
     ]);
 

@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import Post from './models/Post';
+import Post from '../models/Post';
 
 const PostsContext = createContext();
 
@@ -28,7 +28,7 @@ export const PostsProvider = ({ children }) => {
     };
 
     return (
-        <PostsContext.Provider value={{ posts, addPost, deletePost, addReply }}>
+        <PostsContext.Provider value={{ posts, setPosts, addPost, deletePost, addReply }}>
             {children}
         </PostsContext.Provider>
     );

@@ -10,9 +10,9 @@ const Home = () => {
                 <div className="col-lg-10">
                     <div className="card">
                         <div className="card-body">
-                            <h2 className="card-title text-center mb-4">Witamy w SmartLibrary!</h2>
+                            <h2 className="card-title text-center mb-4">Welcome to SmartLibrary!</h2>
                             <Link to="/AboutUs">
-                                <button className="btn btn-primary btn-lg">Dowiedz się więcej</button>
+                                <button className="btn btn-primary btn-lg">Learn more</button>
                             </Link>
                             <div className="carousel-container">
                                 <Carousel interval={2500}>

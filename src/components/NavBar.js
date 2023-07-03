@@ -2,9 +2,9 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../UserContext';
+import { UserContext } from '../Contexts/UserContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AdminContext } from '../AdminContext';
+import { AdminContext } from '../Contexts/AdminContext';
 
 const NavBar = () => {
     const { isAuthenticated, setIsAuthenticated } = useContext(UserContext);
@@ -26,7 +26,7 @@ const NavBar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="navbar-header">
-                    <a className="navbar-brand" href="#">Smart Library</a>
+                    <Link to="/Home" className="navbar-brand">Smart Library</Link>
                 </div>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
@@ -49,7 +49,7 @@ const NavBar = () => {
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <Link to="/SuggestBook" className="dropdown-item">Suggest a book</Link>
-                                <Link to="/Contests" className="dropdown-item">Konkursy</Link>
+                                <Link to="/Contests" className="dropdown-item">Contests</Link>
                                 <Link to="/TermsOfUse" className="dropdown-item">Terms of use</Link>
                             </div>
                         </li>
@@ -69,7 +69,7 @@ const NavBar = () => {
                                     </div>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/DiscussionFOrum" className="nav-link"> Forum dyskusyjne</Link>
+                                    <Link to="/DiscussionFOrum" className="nav-link">Discussion Forum</Link>
                                 </li>
                                 <li className="nav-item">
                                     <button onClick={handleLogout} className="nav-link btn btn-link">Logout</button>

@@ -6,32 +6,30 @@ const TermsOfUse = () => {
         <div className="container mx-auto my-4">
             <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
-                    <Accordion.Header>Ogólne zasady</Accordion.Header>
+                    <Accordion.Header>General rules</Accordion.Header>
                     <Accordion.Body>
                         <ul>
-                            <li>Przy korzystaniu z naszej strony, prosimy o przestrzeganie obowiązującego prawa.</li>
-                            <li>Zabrania się zamieszczania treści o charakterze obraźliwym, niezgodnym z prawem, szkodliwym lub naruszającym prywatność innych użytkowników.</li>
-                            <li>Dozwolone jest korzystanie z naszej strony tylko przez osoby pełnoletnie lub z odpowiednim zezwoleniem rodziców/opiekunów.</li>
+                            <li>Please comply with applicable laws when using our site.</li>
+                            <li>It is forbidden to post content that is offensive, unlawful, harmful or violates the privacy of other users.</li>
+                            <li>It is allowed to use our website only by adults or with the appropriate permission of parents / guardians.</li>
                         </ul>
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
-                    <Accordion.Header>Odpowiedzialność</Accordion.Header>
+                    <Accordion.Header>Responsibility</Accordion.Header>
                     <Accordion.Body>
                         <ul>
-                            <li>Nie ponosimy odpowiedzialności za treści zamieszczane przez użytkowników na naszej stronie.</li>
-                            <li>Użytkownik ponosi pełną odpowiedzialność za wszelkie treści, komentarze, linki lub inne materiały, które zamieszcza na naszej stronie.</li>
-                            <li>Nie gwarantujemy dokładności, kompletności lub aktualności informacji zamieszczanych na stronie.</li>
-                        </ul>
+                            <li>We are not responsible for the content posted by users on our site.</li>
+                            <li>You are fully responsible for any content, comments, links or other material you post on our site.</li>
+                            <li>We do not guarantee the accuracy, completeness or timeliness of the information on the site.</li></ul>
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="2">
-                    <Accordion.Header>Prawa autorskie</Accordion.Header>
+                    <Accordion.Header>Copyright</Accordion.Header>
                     <Accordion.Body>
                         <ul>
-                            <li>Wszystkie prawa autorskie do treści, zdjęć, grafik i innych materiałów zamieszczonych na stronie należą do nas lub zostały nam udostępnione z odpowiednim zezwoleniem.</li>
-                            <li>Zabrania się kopiowania, reprodukowania lub dystrybucji treści zamieszczonych na stronie bez naszej zgody.</li>
-                        </ul>
+                            <li>All copyrights to the content, photos, graphics and other materials posted on the site belong to us or have been made available to us with the appropriate permission.</li>
+                            <li>It is forbidden to copy, reproduce or distribute the content posted on the site without our consent.</li> </ul>
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
