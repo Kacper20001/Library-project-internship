@@ -19,16 +19,24 @@ export const AdminProvider = ({ children }) => {
     };
 
     const handleAdminLogin = () => {
-        const admin = admins.find((admin) => admin.login === adminLogin && admin.password === adminPassword);
-        if (admin) {
-            alert('Pomyślnie zalogowano');
+        if (adminLogin === '1234' && adminPassword === '1234') {
+            alert("You have successfully logged in as the main admin");
             setAdminIsLoggedIn(true);
             navigate('/Home');
         } else {
-            alert('Błędne dane');
-            setAdminIsLoggedIn(false);
+            const isAdmin = admins.some(admin => admin.login === adminLogin && admin.password === adminPassword);
+            if (isAdmin) {
+                alert("Successfully logged in as admin");
+                setAdminIsLoggedIn(true);
+                navigate('/Home');
+            } else {
+                alert("Incorrect data");
+                setAdminIsLoggedIn(false);
+            }
         }
     };
+
+
 
 
     const handleAdminLogout = () => {

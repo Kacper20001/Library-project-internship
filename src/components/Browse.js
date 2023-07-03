@@ -1,4 +1,3 @@
-// Browse.js
 import React, { useState, useRef, useContext } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { BooksContext } from '../Contexts/BooksContext';
@@ -24,9 +23,9 @@ const Browse = () => {
     });
 
     const buttonRefs = useRef({});
-    const { loggedInUser, setLoggedInUser, setUsers, users } = useContext(UserContext);
-    const { books, setBooks, addBook } = useContext(BooksContext);
-    const { adminIsLoggedIn } = useContext(AdminContext);
+    const { loggedInUser, setLoggedInUser, borrowedBooks } = useContext(UserContext);
+    const { books, setBooks, addBook, adminIsLoggedIn } = useContext(BooksContext);
+    const { isAdminLoggedIn } = useContext(AdminContext);
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
@@ -52,20 +51,12 @@ const Browse = () => {
             returnDate: returnDate.toISOString().substring(0, 10),
         };
 
-        const updatedUsers = users.map((user) => {
-            if (user.username === loggedInUser.username) {
-                return {
-                    ...user,
-                    borrowedBooks: [...user.borrowedBooks, updatedBook],
-                };
-            }
-            return user;
-        });
+        setLoggedInUser((prevUser) => ({
+            ...prevUser,
+            borrowedBooks: [...prevUser.borrowedBooks, updatedBook],
+        }));
 
-        const updatedLoggedInUser = updatedUsers.find((user) => user.username === loggedInUser.username);
-        setUsers(updatedUsers);
-        setBooks(books.filter((b) => b.id !== book.id));
-        setLoggedInUser(updatedLoggedInUser);
+        setBooks((prevBooks) => prevBooks.filter((b) => b.id !== book.id));
     };
 
     const handleShowHideClick = (row, rowIndex) => {
@@ -136,7 +127,7 @@ const Browse = () => {
                         <Button ref={(el) => (buttonRefs.current[rowIndex] = el)} onClick={() => handleShowHideClick(row, rowIndex)}>
                             {selectedBook === row && showBooks ? 'Ukryj' : 'Pokaż'}
                         </Button>
-                        {adminIsLoggedIn ? (
+                        {isAdminLoggedIn ? (
                             <>
                                 <Button onClick={() => deleteBook(row.id)}>Usuń</Button>
                             </>
@@ -178,7 +169,7 @@ const Browse = () => {
                         </Col>
                         <Col>
                             <Card.Body>
-                                <Card.Title>{selectedBook.title}</Card.Title>
+                                <Card.Title>{selectedBook.tytul}</Card.Title>
                                 <Card.Text>{selectedBook.summary}</Card.Text>
                             </Card.Body>
                         </Col>
@@ -251,7 +242,7 @@ const Browse = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            {adminIsLoggedIn && <Button onClick={handleAddModalShow}>Dodaj książkę</Button>}
+            {isAdminLoggedIn && <Button onClick={handleAddModalShow}>Dodaj książkę</Button>}
         </div>
     );
 };
