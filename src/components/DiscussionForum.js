@@ -19,10 +19,14 @@ const DiscussionForum = () => {
 
     const handleNewPostSubmit = (event) => {
         event.preventDefault();
-        if (loggedInUser || adminIsLoggedIn) {
-            const authorName = adminIsLoggedIn ? 'ADMIN' : loggedInUser?.username;
-            addPost(loggedInUser?.id, authorName, newPostContent);
-            setNewPostContent('');
+        if (newPostContent.trim() !== '') {
+            if (loggedInUser || adminIsLoggedIn) {
+                const authorName = adminIsLoggedIn ? 'ADMIN' : loggedInUser?.username;
+                addPost(loggedInUser?.id, authorName, newPostContent);
+                setNewPostContent('');
+            }
+        } else {
+            alert('Pole nie może być puste');
         }
     };
 
@@ -36,12 +40,8 @@ const DiscussionForum = () => {
     const handleNewReplySubmit = (event) => {
         event.preventDefault();
         if (loggedInUser && replyToPostId) {
-            addReply(
-                replyToPostId,
-                loggedInUser.id,
-                loggedInUser.username,
-                newReplyContent[replyToPostId]
-            );
+            const authorName = adminIsLoggedIn ? 'ADMIN' : loggedInUser.username;
+            addReply(replyToPostId, loggedInUser.id, authorName, newReplyContent[replyToPostId]);
             setNewReplyContent({ ...newReplyContent, [replyToPostId]: '' });
         }
     };
@@ -66,7 +66,12 @@ const DiscussionForum = () => {
         setPosts((prevPosts) =>
             prevPosts.map((post) => {
                 if (post.id === postId) {
-                    post.replies = post.replies.filter((reply) => reply.id !== replyId);
+                    post.replies = post.replies.map((reply) => {
+                        if (reply.id === replyId) {
+                            reply.content = '(wiadomość usunięta przez administratora)';
+                        }
+                        return reply;
+                    });
                 }
                 return post;
             })
@@ -79,16 +84,9 @@ const DiscussionForum = () => {
         return visibleReplies.map((reply) => (
             <div key={reply.id}>
                 <h6>{reply.authorName}</h6>
-                <p>
-                    {reply.isDeletedByAdmin
-                        ? '(the message has been deleted by the administrator)'
-                        : reply.content}
-                </p>
+                <p>{reply.isDeletedByAdmin ? '(wiadomość usunięta przez administratora)' : reply.content}</p>
                 {loggedInUser && loggedInUser.id === reply.authorId && (
-                    <button
-                        onClick={() => handleDeleteReply(postId, reply.id)}
-                        className="btn btn-danger btn-sm"
-                    >
+                    <button onClick={() => handleDeleteReply(postId, reply.id)} className="btn btn-danger btn-sm">
                         Delete
                     </button>
                 )}
@@ -98,7 +96,7 @@ const DiscussionForum = () => {
 
     const renderPostContent = (post) => {
         if (post.isDeletedByAdmin) {
-            return <p>(The post has been deleted by the administrator)</p>;
+            return <p>(wiadomość usunięta przez administratora)</p>;
         } else {
             return <p>{post.content}</p>;
         }
@@ -108,12 +106,12 @@ const DiscussionForum = () => {
         <div className="container py-3">
             <h3 className="mb-3">Discussion</h3>
             <form onSubmit={handleNewPostSubmit} className="mb-3">
-                <textarea
-                    value={newPostContent}
-                    placeholder="Your post"
-                    onChange={handleNewPostChange}
-                    className="form-control mb-2"
-                />
+        <textarea
+            value={newPostContent}
+            placeholder="Your post"
+            onChange={handleNewPostChange}
+            className="form-control mb-2"
+        />
                 <button type="submit" className="btn btn-primary">
                     Send
                 </button>
@@ -142,7 +140,7 @@ const DiscussionForum = () => {
                         </div>
                         <div className="card-body">
                             {renderPostContent(post)}
-                            {(loggedInUser && loggedInUser.id === post.authorId && !adminIsLoggedIn) && (
+                            {(adminIsLoggedIn || (loggedInUser && loggedInUser.id === post.authorId)) && (
                                 <button
                                     onClick={() => handleDeletePost(post.id)}
                                     className="btn btn-danger btn-sm mr-2"
@@ -164,12 +162,12 @@ const DiscussionForum = () => {
                         {replyToPostId === post.id && (
                             <div className="card-footer">
                                 <form onSubmit={handleNewReplySubmit}>
-                                    <textarea
-                                        value={newReplyContent[replyToPostId] || ''}
-                                        placeholder="Your comment"
-                                        onChange={handleNewReplyChange}
-                                        className="form-control mb-2"
-                                    />
+                  <textarea
+                      value={newReplyContent[replyToPostId] || ''}
+                      placeholder="Your comment"
+                      onChange={handleNewReplyChange}
+                      className="form-control mb-2"
+                  />
                                     <button type="submit" className="btn btn-primary btn-sm">
                                         Reply
                                     </button>
