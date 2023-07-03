@@ -154,14 +154,14 @@ const BorrowedBooks = () => {
                 <Form.Group>
                     <Form.Control
                         name="searchQuery"
-                        placeholder="Tytuł | Autor | Gatunek"
+                        placeholder="Title | Author | Genre"
                         value={searchQuery}
                         onChange={handleSearchChange}
                     />
                 </Form.Group>
                 <Dropdown>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Sortuj
+                        Sort
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item onClick={() => handleSort('tytul', 'asc')}>Tytuł (A-Z)</Dropdown.Item>
@@ -206,15 +206,15 @@ const BorrowedBooks = () => {
                                 {bookReviews[selectedBook.id] && bookReviews[selectedBook.id].length > 0 && (
                                     <>
                                         <Card.Text>
-                                            Średnia ocen:
+                                            Average rate:
                                             {bookReviews[selectedBook.id].reduce((acc, review) => acc + review.rating, 0) / bookReviews[selectedBook.id].length}
                                         </Card.Text>
                                         <Button onClick={() => setShowReviews(!showReviews)}>
-                                            Pokaż komentarze
+                                            Show comments
                                         </Button>
                                         {showReviews && bookReviews[selectedBook.id] && bookReviews[selectedBook.id].length > 0 && (
                                             <div>
-                                                <Card.Text>Komentarze:</Card.Text>
+                                                <Card.Text>Comments:</Card.Text>
                                                 {bookReviews[selectedBook.id].map((review, index) => (
                                                     <Card key={index}>
                                                         <Card.Body>

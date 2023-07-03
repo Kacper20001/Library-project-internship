@@ -23,9 +23,10 @@ const Browse = () => {
     });
 
     const buttonRefs = useRef({});
-    const { loggedInUser, setLoggedInUser, borrowedBooks } = useContext(UserContext);
-    const { books, setBooks, addBook, adminIsLoggedIn } = useContext(BooksContext);
+    const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+    const { books, setBooks, addBook, bookReviews } = useContext(BooksContext);
     const { isAdminLoggedIn } = useContext(AdminContext);
+    const [showReviews, setShowReviews] = useState(false);
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
@@ -82,6 +83,7 @@ const Browse = () => {
         });
     };
 
+
     const handleAddBook = () => {
         const updatedBook = {
             ...newBook,
@@ -121,18 +123,18 @@ const Browse = () => {
         },
         {
             text: 'Actions',
-            formatter: (cell, row, rowIndex, formatExtraData) => {
+            formatter: (cell, row, rowIndex) => {
                 return (
                     <>
                         <Button ref={(el) => (buttonRefs.current[rowIndex] = el)} onClick={() => handleShowHideClick(row, rowIndex)}>
-                            {selectedBook === row && showBooks ? 'Ukryj' : 'Pokaż'}
+                            {selectedBook === row && showBooks ? 'Hide' : 'Show'}
                         </Button>
                         {isAdminLoggedIn ? (
                             <>
-                                <Button onClick={() => deleteBook(row.id)}>Usuń</Button>
+                                <Button onClick={() => deleteBook(row.id)}>Delete</Button>
                             </>
                         ) : (
-                            loggedInUser && <Button onClick={() => borrowBook(row)}>Wypożycz</Button>
+                            loggedInUser && <Button onClick={() => borrowBook(row)}>Borrow</Button>
                         )}
                     </>
                 );
@@ -171,6 +173,28 @@ const Browse = () => {
                             <Card.Body>
                                 <Card.Title>{selectedBook.tytul}</Card.Title>
                                 <Card.Text>{selectedBook.summary}</Card.Text>
+                                {bookReviews[selectedBook.id] && bookReviews[selectedBook.id].length > 0 && (
+                                    <Card.Text>
+                                        Average rate:
+                                        {(bookReviews[selectedBook.id].reduce((acc, review) => acc + parseInt(review.rating), 0) / bookReviews[selectedBook.id].length).toFixed(2)}
+                                    </Card.Text>
+                                )}
+                                <Button onClick={() => setShowReviews(!showReviews)}>
+                                    Show comments
+                                </Button>
+                                {showReviews && bookReviews[selectedBook.id] && bookReviews[selectedBook.id].length > 0 && (
+                                    <div>
+                                        <Card.Text>Comments:</Card.Text>
+                                        {bookReviews[selectedBook.id].map((review, index) => (
+                                            <Card key={index}>
+                                                <Card.Body>
+                                                    <Card.Text>Rating: {review.rating}</Card.Text>
+                                                    <Card.Text>{review.review}</Card.Text>
+                                                </Card.Body>
+                                            </Card>
+                                        ))}
+                                    </div>
+                                )}
                             </Card.Body>
                         </Col>
                     </Row>
@@ -178,12 +202,12 @@ const Browse = () => {
             )}
             <Modal show={showAddModal} onHide={handleAddModalClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Dodaj nową książkę</Modal.Title>
+                    <Modal.Title>Add new book</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            <Form.Label>Tytuł</Form.Label>
+                            <Form.Label>Title</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={newBook.tytul}
@@ -191,7 +215,7 @@ const Browse = () => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Autor</Form.Label>
+                            <Form.Label>Author</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={newBook.autor}
@@ -199,7 +223,7 @@ const Browse = () => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Gatunek</Form.Label>
+                            <Form.Label>Genre</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={newBook.gatunek}
@@ -207,7 +231,7 @@ const Browse = () => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Okładka</Form.Label>
+                            <Form.Label>Cover</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={newBook.cover}
@@ -215,7 +239,7 @@ const Browse = () => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Opis</Form.Label>
+                            <Form.Label>Description</Form.Label>
                             <Form.Control
                                 as="textarea"
                                 rows={3}
@@ -235,14 +259,14 @@ const Browse = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleAddModalClose}>
-                        Anuluj
+                        Cancel
                     </Button>
                     <Button variant="primary" onClick={handleAddBook}>
-                        Dodaj
+                        Add
                     </Button>
                 </Modal.Footer>
             </Modal>
-            {isAdminLoggedIn && <Button onClick={handleAddModalShow}>Dodaj książkę</Button>}
+            {isAdminLoggedIn && <Button onClick={handleAddModalShow}>Add book</Button>}
         </div>
     );
 };
