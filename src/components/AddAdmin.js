@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { AdminContext } from '../Contexts/AdminContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,8 +12,8 @@ const AddAdmin = () => {
         addAdmin(newAdminLogin, newAdminPassword);
         setNewAdminLogin('');
         setNewAdminPassword('');
-        alert("Pomyślnie dodano nowego admina");
-    }
+        alert('Pomyślnie dodano nowego admina');
+    };
 
     return (
         <div className="container mt-5">
