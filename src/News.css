@@ -1,0 +1,21 @@
+#News-container {
+    width: 100%;
+    margin-top: 5rem;
+    height: 100%;
+}
+
+#News-card {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    #News-container {
+        margin-top: 2rem;
+    }
+
+    #News-card {
+        width: 100%;
+    }
+}
+

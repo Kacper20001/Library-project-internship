@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { AdminContext } from '../Contexts/AdminContext';
 import { AboutUsContext } from '../Contexts/AboutUsContext';
-
+import '../AboutUs.css';
 const AboutUs = () => {
     const { adminIsLoggedIn, isEditing,setIsEditing, handleEditText } = useContext(AdminContext);
     const { text, setText } = useContext(AboutUsContext);
@@ -16,7 +16,7 @@ const AboutUs = () => {
     };
 
     return (
-        <div className="container py-0">
+        <div className="container py-0" id="AboutUs-container">
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="card">

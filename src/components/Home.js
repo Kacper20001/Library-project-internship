@@ -2,18 +2,15 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
-
+import '../Home.css';
 const Home = () => {
     return (
-        <div className="container">
+        <div className="container" id={"home-container"}>
             <div className="row justify-content-center">
                 <div className="col-lg-10">
                     <div className="card">
                         <div className="card-body">
                             <h2 className="card-title text-center mb-4">Welcome to SmartLibrary!</h2>
-                            <Link to="/AboutUs">
-                                <button className="btn btn-primary btn-lg">Learn more</button>
-                            </Link>
                             <div className="carousel-container">
                                 <Carousel interval={2500}>
                                     <Carousel.Item>
@@ -46,6 +43,9 @@ const Home = () => {
                                     </Carousel.Item>
                                 </Carousel>
                             </div>
+                            <Link to="/AboutUs">
+                            <button className="btn btn-primary btn-lg" id="learn">Learn more</button>
+                            </Link>
                         </div>
                     </div>
                 </div>

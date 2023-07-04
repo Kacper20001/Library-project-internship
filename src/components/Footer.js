@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../Footer.css';
 
 const Footer = () => {
     return (
-        <footer className="bg-dark text-light">
-            <div className="container py-3">
+        <footer className="bg-dark text-light sticky-footer">
+            <div className="container py-3" id="foot-container">
                 <div className="d-flex justify-content-between align-items-center">
                     <h5 className="text-center">Smart Library</h5>
                     <Link to="/AdminLogin">

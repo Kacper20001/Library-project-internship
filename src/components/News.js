@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AdminContext } from '../Contexts/AdminContext';
 import { NewsContext } from '../Contexts/NewsContext';
 import { Card, Button, Form, Container, Row, Col } from 'react-bootstrap';
+import '../News.css';
 
 const News = () => {
     const { adminIsLoggedIn } = useContext(AdminContext);
@@ -45,11 +46,11 @@ const News = () => {
     };
 
     return (
-        <Container>
-            <Row>
+        <Container id='News-container'>
+            <Row className="flex-column">
                 {newsData.map((news, index) => (
-                    <Col md={6} key={index}>
-                        <Card className="mb-4">
+                    <Col md={12} key={index}>
+                        <Card className="mb-4" id="News-card">
                             <Card.Body>
                                 <Card.Title>{news.title}</Card.Title>
                                 {adminIsLoggedIn && index === editingIndex ? (
@@ -82,7 +83,7 @@ const News = () => {
                 ))}
             </Row>
             {adminIsLoggedIn && (
-                <Row>
+                <Row className="flex-column">
                     <Col md={6}>
                         <Card className="mb-4">
                             <Card.Body>

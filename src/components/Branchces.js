@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BranchesContext } from '../Contexts/BranchesContext';
 import { AdminContext } from '../Contexts/AdminContext';
-
+import '../Branches.css'
 const Branches = () => {
     const { newsData, updateNewsData } = useContext(BranchesContext);
     const { adminIsLoggedIn, isEditing, handleEditText, handleSaveText } = useContext(AdminContext);
@@ -34,11 +34,11 @@ const Branches = () => {
     };
 
     return (
-        <div className="container">
-            <div className="row">
+        <div className="container" id="Branchces-container">
+            <div className="row justify-content-md-center">
                 {newsData.map((branch, index) => (
                     <div key={index} className="col-md-3 mb-6">
-                        <div className="card h-100" style={{ maxWidth: "300px", margin: "auto" }}>
+                        <div className="card h-100" id="Branchces-card" style={{ maxWidth: "600px", margin: "auto" }}>
                             <img className="card-img-top" src={branch.image} alt="Branch" style={{ width: '100%', maxHeight: '200px' }} />
                             <div className="card-body">
                                 <h4 className="card-title">{branch.address}</h4>

@@ -5,10 +5,11 @@ import { useContext } from 'react';
 import { UserContext } from '../Contexts/UserContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AdminContext } from '../Contexts/AdminContext';
+import '../NavBar.css';
 
 const NavBar = () => {
     const { isAuthenticated, setIsAuthenticated } = useContext(UserContext);
-    const { adminIsLoggedIn, setAdminIsLoggedIn, handleAdminLogout} = useContext(AdminContext);
+    const { adminIsLoggedIn, handleAdminLogout} = useContext(AdminContext);
     const navigate = useNavigate();
     const handleLogout = () => {
         setIsAuthenticated(false);
@@ -19,7 +20,7 @@ const NavBar = () => {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-md navbar-light bg-light">
+            <nav className="navbar navbar-expand-md">
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">

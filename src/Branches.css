@@ -1,0 +1,11 @@
+#Branchces-container {
+    margin-top: 6rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#Branchces-card {
+    margin-bottom: 1rem;
+}
