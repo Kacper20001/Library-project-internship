@@ -1,0 +1,15 @@
+#TermsOfUse-container {
+    margin-top: 8rem;
+    margin-bottom: 2rem;
+    height: 100%;
+    flex: 1 1;
+}
+
+@media (max-width: 768px) {
+    #TermsOfUse-container {
+        margin-top: 0;
+        margin-bottom: 2rem;
+        height: 100%;
+        flex: 1 1;
+    }
+}

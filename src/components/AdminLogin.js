@@ -1,10 +1,12 @@
 import React, {useContext} from 'react';
 import { AdminContext } from '../Contexts/AdminContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../AdminLogin.css';
+
 const AdminLogin = () => {
-    const { adminLogin, setAdminLogin, adminPassword, setAdminPassword, adminIsLoggedIn, handleAdminLogin  } = useContext(AdminContext);
+    const { adminLogin, setAdminLogin, adminPassword, setAdminPassword, handleAdminLogin  } = useContext(AdminContext);
     return (
-        <div className="container mt-5">
+        <div className="AdminLogin-container">
             <div className="card" style={{ maxWidth: '400px', margin: 'auto' }}>
                 <div className="card-body">
                     <h2 className="card-title text-center mb-4">Logowanie Admina do SmartLibrary</h2>

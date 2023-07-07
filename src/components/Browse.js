@@ -4,7 +4,7 @@ import { BooksContext } from '../Contexts/BooksContext';
 import { UserContext } from '../Contexts/UserContext';
 import { AdminContext } from '../Contexts/AdminContext';
 import { Card, Row, Col, Button, Form, Dropdown, Modal } from 'react-bootstrap';
-
+import '../Browse.css'
 const Browse = () => {
     const [selectedBook, setSelectedBook] = useState(null);
     const [showBooks, setShowBooks] = useState(false);
@@ -143,12 +143,12 @@ const Browse = () => {
     ];
 
     return (
-        <div style={{ marginLeft: '0' }}>
-            <Form className="mb-3">
+        <div className='Browse-container'>
+            <Form className="browse-formularz">
                 <Form.Group>
-                    <Form.Control name="searchQuery" placeholder="Tytuł | Autor | Gatunek" value={searchQuery} onChange={handleSearchChange} />
+                    <Form.Control name="searchQuery" className='wyszukiwanie' placeholder="Tytuł | Autor | Gatunek" value={searchQuery} onChange={handleSearchChange} />
                 </Form.Group>
-                <Dropdown>
+                <Dropdown className="sortowanie">
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                         Sortuj
                     </Dropdown.Toggle>
@@ -162,9 +162,9 @@ const Browse = () => {
                     </Dropdown.Menu>
                 </Dropdown>
             </Form>
-            <BootstrapTable keyField="id" data={filteredBooks} columns={columns} hover />
+            <BootstrapTable keyField="id" data={filteredBooks} columns={columns} hover id="Browse-tablica" className="Browse-table" />
             {selectedBook && showBooks && (
-                <Card>
+                <Card className="Browse-card">
                     <Row className="no-gutters">
                         <Col style={{ maxWidth: '200px', padding: '0' }}>
                             <Card.Img variant="top" src={selectedBook.cover} />

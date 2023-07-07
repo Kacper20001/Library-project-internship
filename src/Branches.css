@@ -4,6 +4,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    height: 100%;
+    flex: 1 1;
 }
 
 #Branchces-card {

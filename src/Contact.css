@@ -1,0 +1,28 @@
+#Contact-container {
+    margin-bottom: 4rem;
+    margin-top: 12rem;
+    height: 100%;
+    flex: 1 1;
+}
+
+@media (max-width: 768px) {
+    #Contact-container {
+        margin-bottom: 2rem;
+        margin-top: 0;
+        height: 100%;
+        flex: 1 1;
+    }
+    .col-md-3 {
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+.card {
+    margin-bottom: 1rem;
+}

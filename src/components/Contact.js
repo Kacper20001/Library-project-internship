@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import '../Contact.css';
 const Contact = () => {
     const contacts = [
         {
@@ -32,7 +32,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="container my-5">
+        <div className="container" id="Contact-container">
             <div className="row">
                 {contacts.map((contact, index) => (
                     <div key={index} className="col-md-3 mb-6">

@@ -1,0 +1,50 @@
+.Borrowed-container {
+    margin-top: 8rem;
+    margin-bottom: 4rem;
+    height: 100%;
+    flex: 1 1;
+    width: 100%;
+    overflow-x: auto;
+}
+.wyszukiwanie {
+    margin-bottom: 15px;
+}
+.Borrowed-card {
+    max-width: 80%;
+    background-color: #e6f1ff;
+}
+.borrowed-formularz {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+}
+
+#Borrowed-tablica {
+    max-width: 85%;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .Borrowed-container {
+        margin-top: 0;
+        margin-bottom: 2rem;
+        overflow-x: auto;
+    }
+    .Borrowed-card {
+        max-width: 100%;
+    }
+    .borrowed-formularz {
+        max-width: 100%;
+    }
+    #Borrowed-tablica {
+        width: fit-content;
+    }
+}
+.recenzja {
+    max-width: 80%;
+}
+button {
+    margin-left: 5px;
+}

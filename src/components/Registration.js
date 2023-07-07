@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import { useContext } from 'react';
 import { UserContext } from '../Contexts/UserContext';
 import { BooksContext } from '../Contexts/BooksContext';
-
+import '../Registration.css';
 const Registration = () => {
     const { users, setUsers, setUserType } = useContext(UserContext);
     const {books, setBooks} = useContext(BooksContext);
@@ -60,7 +60,7 @@ const Registration = () => {
     }
 
     return (
-        <div className={"container mt-0"}>
+        <div className="Registration-container">
             <div className="card" style={{maxWidth: "500px", margin: "auto"}}>
                 <div className="card-header text-center" style={{ margin: "0" }}>
                     <h2>Rejestracja</h2>
@@ -184,12 +184,12 @@ const Registration = () => {
                                 <option value="zachodniopomorskie">Zachodniopomorskie</option>
                             </select>
                         </div>
-                        <div style={{margin: "auto"}}>
-                            <button className="btn btn-success btn-block mt-2" style={{ padding: "10px", fontSize: "18px" }} onClick={(e) => { e.preventDefault(); handleRegister(); }}>
+                        <div className="buttons">
+                            <button className="register" style={{ padding: "10px", fontSize: "18px" }} onClick={(e) => { e.preventDefault(); handleRegister(); }}>
                                 Register
                             </button>
                             <Link to="/Login">
-                                <button className="btn btn-secondary btn-block mt-2" style={{ padding: "10px", fontSize: "18px" }} onClick={() => setIsRegistering(false)}>
+                                <button className="login" style={{ padding: "10px", fontSize: "18px" }} onClick={() => setIsRegistering(false)}>
                                     Go back to login
                                 </button>
                             </Link>

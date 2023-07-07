@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AdminContext } from '../Contexts/AdminContext';
 import { ContestsContext } from "../Contexts/ContestsContext";
 import { Card, Button, Form, Container, Row, Col } from 'react-bootstrap';
-
+import '../Contests.css'
 const Contests = () => {
     const { adminIsLoggedIn } = useContext(AdminContext);
     const { contestsData, updateContestsData, addContest, deleteContest } = useContext(ContestsContext);
@@ -54,18 +54,8 @@ const Contests = () => {
         setNewContestDescription('');
     };
 
-    const contestsCards = contestsData.map((contest, index) => (
-        <div className="card" key={index}>
-            <div className="card-body">
-                <h5 className="card-title">{contest.title}</h5>
-                <p className="card-text">{contest.description}</p>
-                <p className="card-deadline">Application deadline: {contest.deadline}</p>
-            </div>
-        </div>
-    ));
-
     return (
-        <Container>
+        <Container id="Contests-container">
             {adminIsLoggedIn && (
                 <Row>
                     <Col md={6}>

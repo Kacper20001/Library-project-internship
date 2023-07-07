@@ -1,0 +1,29 @@
+.DiscussionForum-container {
+    margin-top: 8rem;
+    margin-bottom: 4rem;
+    height: 100%;
+    flex: 1 1;
+    width: 100%;
+    overflow-x: auto;
+}
+.dyskusjaPost {
+    border: 2px solid gray;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 85%;
+    background-color: #f6f6f6;
+}
+.Discussion-card {
+    margin-top: 2rem;
+    max-width: 80%;
+    background-color: #f6f6f6;
+}
+
+@media (max-width: 768px) {
+    .DiscussionForum-container {
+        margin-top: 0;
+        margin-bottom: 2rem;
+        overflow-x: auto;
+    }
+}

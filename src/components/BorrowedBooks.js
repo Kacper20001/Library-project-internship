@@ -5,7 +5,7 @@ import { Card, Row, Col, Button, Form, Dropdown } from 'react-bootstrap';
 import { BooksContext } from '../Contexts/BooksContext';
 import { UserContext } from '../Contexts/UserContext';
 import { AdminContext } from '../Contexts/AdminContext';
-
+import '../BorrowedBooks.css';
 const BorrowedBooks = () => {
     const { adminIsLoggedIn } = useContext(AdminContext);
     const { loggedInUser, setUsers, users, setLoggedInUser } = useContext(UserContext);
@@ -149,11 +149,12 @@ const BorrowedBooks = () => {
     };
 
     return (
-        <div style={{ marginLeft: '0' }}>
-            <Form className="mb-3">
+        <div className='Borrowed-container'>
+            <Form className='borrowed-formularz'>
                 <Form.Group>
                     <Form.Control
                         name="searchQuery"
+                        className='wyszukiwanie'
                         placeholder="Title | Author | Genre"
                         value={searchQuery}
                         onChange={handleSearchChange}
@@ -173,9 +174,9 @@ const BorrowedBooks = () => {
                     </Dropdown.Menu>
                 </Dropdown>
             </Form>
-            <BootstrapTable keyField="id" data={filteredBooks} columns={columns} hover />
+            <BootstrapTable keyField="id" data={filteredBooks} id="Borrowed-tablica" columns={columns} hover />
             {showReviewForm && selectedBook && (
-                <Form onSubmit={(e) => { e.preventDefault(); handleReviewSubmit(selectedBook.id); }}>
+                <Form className="recenzja" onSubmit={(e) => { e.preventDefault(); handleReviewSubmit(selectedBook.id); }}>
                     <Form.Group>
                         <Form.Label>Review:</Form.Label>
                         <Form.Control as="textarea" value={reviewText} onChange={(e) => setReviewText(e.target.value)} />
@@ -194,7 +195,7 @@ const BorrowedBooks = () => {
                 </Form>
             )}
             {selectedBook && showBook && (
-                <Card>
+                <Card className='Borrowed-card'>
                     <Row className="no-gutters">
                         <Col style={{ maxWidth: '200px', padding: '0' }}>
                             <Card.Img variant="top" src={selectedBook.cover} />

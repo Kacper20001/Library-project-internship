@@ -1,4 +1,6 @@
 #AboutUs-container {
     margin-top: 7rem;
     margin-bottom: 3rem;
+    height: 100%;
+    flex: 1 1;
 }

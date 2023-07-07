@@ -37,9 +37,7 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [users, setUsers] = useState([]);
     const [loggedInUser, setLoggedInUser] = useState(null);
-    const [userType, setUserType] = useState("");
     const [books, setBooks] = useState([])
-    const [posts, setPosts] = useState([]);
     return (
         <UserContext.Provider value={{ isAuthenticated, setIsAuthenticated, users, setUsers, loggedInUser, setLoggedInUser}}>
             <BooksProvider value={{books, setBooks}}>

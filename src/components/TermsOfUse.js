@@ -1,9 +1,10 @@
 import React from 'react';
 import { Accordion } from 'react-bootstrap';
+import '../TermsOfUse.css';
 
 const TermsOfUse = () => {
     return (
-        <div className="container mx-auto my-4">
+        <div className="container" id="TermsOfUse-container">
             <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>General rules</Accordion.Header>

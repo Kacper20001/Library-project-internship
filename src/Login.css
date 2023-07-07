@@ -1,0 +1,16 @@
+#Login-container {
+    margin-top: 8rem;
+    margin-bottom: 4rem;
+    height: 100%;
+    flex: 1 1;
+}
+
+@media (max-width: 768px) {
+    #Login-container {
+        margin-top: 0;
+        margin-bottom: 2rem;
+        height: 100%;
+        flex: 1 1;
+    }
+
+}

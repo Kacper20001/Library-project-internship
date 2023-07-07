@@ -3,7 +3,7 @@ import PostsContext from '../Contexts/PostsContext';
 import { UserContext } from '../Contexts/UserContext';
 import { AdminContext } from '../Contexts/AdminContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import '../DiscussioForum.css';
 const DiscussionForum = () => {
     const { posts, setPosts, addPost, deletePost, addReply } = useContext(PostsContext);
     const { loggedInUser } = useContext(UserContext);
@@ -103,19 +103,21 @@ const DiscussionForum = () => {
     };
 
     return (
-        <div className="container py-3">
-            <h3 className="mb-3">Discussion</h3>
-            <form onSubmit={handleNewPostSubmit} className="mb-3">
-        <textarea
-            value={newPostContent}
-            placeholder="Your post"
-            onChange={handleNewPostChange}
-            className="form-control mb-2"
-        />
-                <button type="submit" className="btn btn-primary">
-                    Send
-                </button>
-            </form>
+        <div className="DiscussionForum-container">
+            <div className="dyskusjaPost">
+                <h3 className="mb-3">Discussion</h3>
+                <form onSubmit={handleNewPostSubmit} className="mb-3">
+                    <textarea
+                        value={newPostContent}
+                        placeholder="Your post"
+                        onChange={handleNewPostChange}
+                        className="form-control mb-2"
+                    />
+                    <button type="submit" className="btn btn-primary">
+                        Send
+                    </button>
+                </form>
+            </div>
             {posts.map((post) => {
                 const renderMoreCommentsButton = () => {
                     const commentsCount = post.replies.length;
@@ -134,7 +136,7 @@ const DiscussionForum = () => {
                 };
 
                 return (
-                    <div key={post.id} className="card mb-2">
+                    <div key={post.id} className="card Discussion-card">
                         <div className="card-header">
                             <h5>{post.authorName}</h5>
                         </div>

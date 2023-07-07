@@ -1,0 +1,37 @@
+.Registration-container {
+    margin-top: 8rem;
+    margin-bottom: 4rem;
+    width: 100%;
+    flex: 1 1;
+}
+
+@media (max-width: 768px) {
+    .Registration-container {
+        margin-top: 0;
+        margin-bottom: 2px;
+        width: 100%;
+        flex: 1 1;
+    }
+}
+.register {
+    margin-right: 10px;
+    font-size: x-small;
+    background-color: #67d91d;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.login {
+    font-size: x-small;
+    background-color: #0bb6ea;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.buttons {
+    margin-top: 10px;
+}

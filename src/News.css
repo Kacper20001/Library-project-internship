@@ -1,7 +1,9 @@
 #News-container {
     width: 100%;
-    margin-top: 5rem;
+    margin-top: 8rem;
+    margin-bottom: 4rem;
     height: 100%;
+    flex: 1 1;
 }
 
 #News-card {
@@ -11,7 +13,10 @@
 
 @media screen and (max-width: 768px) {
     #News-container {
-        margin-top: 2rem;
+        margin-top: 0rem;
+        margin-bottom: 2rem;
+        height: 100%;
+        flex: 1 1;
     }
 
     #News-card {

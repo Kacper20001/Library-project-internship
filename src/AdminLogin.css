@@ -1,0 +1,15 @@
+.AdminLogin-container {
+    margin-top: 8rem;
+    margin-bottom: 4rem;
+    height: 100%;
+    flex: 1 1;
+}
+
+@media (max-width: 768px) {
+    .AdminLogin-container {
+        margin-top: 0rem;
+        margin-bottom: 2rem;
+        height: 100%;
+        flex: 1 1;
+    }
+}

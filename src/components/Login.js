@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../Contexts/UserContext';
+import '../Login.css';
 const Login = () => {
     const { users, setIsAuthenticated, setLoggedInUser } = useContext(UserContext);
     const [username, setUsername] = useState('');
@@ -22,7 +23,7 @@ const Login = () => {
     };
 
     return (
-        <div className={"container mt-5"}>
+        <div className="container" id="Login-container">
             <div className="card" style={{maxWidth: "400px", margin: "auto"}}>
                 <div className="card-body">
                     <h2 className="card-title text-center mb-4">Login to SmartLibrary</h2>
